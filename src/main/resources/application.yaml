@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: Topics
+  profiles:
+    group:
+      default:
+        active: dev
+        include: dev,test,prod
+    active: dev
+  datasource:
+    url: jdbc:mariadb://localhost:3306/mynotes
+    username: root
+    password: root
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+logging:
+  level:
+    web: info
+    org.springframework.web: info
+    org.springframework.security: debug

@@ -1,0 +1,90 @@
+$background: #7fae9225;
+$foreground: #fafafa;
+
+$primary: #60e1be;
+$primaryInverse: rgba(96, 225, 190, 0.75);
+
+$secondary: #6bbfa5;
+$secondaryInverse: #4ddfab;
+
+$cardColor: #a1cdc8;
+$cardColorInverse: #4fd6b7;
+$danger: rgba(255, 60, 60, 0.75);
+$dangerInverse: rgba(255, 20, 20, 0.81);
+
+$defaultFont: "Roboto", sans-serif;
+
+body {
+    background-color: $background;
+    border-radius: 12px;
+    padding: 6px;
+    font-family: $defaultFont;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.card-list {
+    display: flex;
+    gap: 9px;
+    flex-flow: row wrap;
+}
+
+.topic-card {
+    background-color: $cardColor;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 3px;
+    width: 200px;
+    flex-shrink: 0;
+    flex-grow: 1;
+
+    a {
+        background-color: $secondary;
+        color: $foreground;
+    }
+
+    a:hover {
+        background-color: $secondaryInverse;
+    }
+
+    .danger {
+        background-color: $danger;
+
+    }
+
+    .danger:hover {
+        background-color: $dangerInverse;
+        box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.topic-card:hover {
+    background-color: $cardColorInverse;
+    box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+
+.btn {
+    text-decoration: none;
+    padding: 6px;
+    margin: 3px;
+    border-radius: 12px;
+    color: $foreground;
+}
+
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+
+.primary {
+    background-color: $primary;
+    margin: 42px 0;
+}
+
+.primary:hover {
+    background-color: $primaryInverse;
+}

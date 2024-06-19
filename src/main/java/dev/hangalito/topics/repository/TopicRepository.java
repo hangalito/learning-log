@@ -12,4 +12,8 @@ public interface TopicRepository extends CrudRepository<Topic, Integer> {
 
     Optional<Topic> findByAuthorAndName(User author, String name);
 
+    Optional<Topic> findByAuthorAndId(User author, int id);
+
+    void deleteByNameAndAuthor(String name, User author);
+
 }

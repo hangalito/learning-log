@@ -15,7 +15,10 @@
         <div class="topic-card" th:each="topic : ${topics}">
             <h2 th:text="${topic.name}">TOPIC NAME</h2>
             <a class="btn secondary" href="#">Subjects</a>
-            <a class="btn danger" href="#">Delete</a>
+            <form method="post" th:action="@{/topic/delete}">
+                <input name="id" th:value="${topic.id}" type="hidden">
+                <input class="btn danger" th:value="Delete" type="submit">
+            </form>
         </div>
     </div>
     <a class="fab" th:href="@{/topic/new}">Add topic</a>

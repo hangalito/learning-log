@@ -12,7 +12,6 @@ main a {
     display: flex;
     gap: 9px;
     flex-flow: row wrap;
-    justify-content: flex-start;
 }
 
 .topic-card {
@@ -22,7 +21,7 @@ main a {
     margin: 3px;
     width: 200px;
     flex-shrink: 0;
-    flex-grow: 0;
+    flex-grow: 1;
 }
 
 .topic-card a {

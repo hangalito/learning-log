@@ -38,10 +38,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
     }
 
-    public User getUser(String username) {
-        return userRepository.findByUsername(username).orElseThrow(IllegalStateException::new);
-    }
-
     public void createAccount(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -75,5 +71,9 @@ public class UserService implements UserDetailsService {
         topicService.addTopic(topic);
     }
 
+    public void deleteTopic(int id, Principal principal) {
+        userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        topicService.deleteById(id);
+    }
 
 }

@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-</head>
+<meta charset="UTF-8">
 <body>
 <nav th:fragment="header(username)">
     <a class="title" th:href="@{/}">
-        <abbr th:title="${@applicationName} + ' Home'" th:text="${@applicationName}"></abbr>
+        <abbr th:text="${@applicationName}" th:title="${@applicationName} + ' Home'"></abbr>
     </a>
-    <a th:href="@{/profile}" class="profile" th:text="${username}"></a>
+    <a class="profile" th:href="@{/profile}" th:text="${username}"></a>
 </nav>
 </body>
 </html>

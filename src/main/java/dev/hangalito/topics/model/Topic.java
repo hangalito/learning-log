@@ -1,6 +1,8 @@
 package dev.hangalito.topics.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +25,8 @@ public class Topic {
     private Integer id;
 
     @Column(name = "name")
+    @NotBlank(message = "This field is required")
+    @Size(max = 70, message = "Topics should not be longer than 70 characters")
     private String name;
 
     @ManyToOne(targetEntity = User.class)

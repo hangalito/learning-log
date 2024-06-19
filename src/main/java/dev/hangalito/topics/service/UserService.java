@@ -1,6 +1,7 @@
 package dev.hangalito.topics.service;
 
 import dev.hangalito.topics.exceptions.InvalidCredentialException;
+import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -13,28 +14,32 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
+import java.util.List;
 
 @Slf4j
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
-    private final UserRepository  userRepository;
+    private final UserRepository userRepository;
+    private final TopicService   topicService;
+
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username).orElseThrow(
                 () -> new UsernameNotFoundException("User " + username + " not found"));
-        return org.springframework.security.core.userdetails.
-                User.builder()
-                    .username(user.getUsername())
-                    .password(user.getPassword())
-                    .build();
+        return org.springframework.security.core.userdetails.User.builder().username(user.getUsername()).password(
+                user.getPassword()).build();
     }
 
     public User getUser(Principal principal) {
         return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+    }
+
+    public User getUser(String username) {
+        return userRepository.findByUsername(username).orElseThrow(IllegalStateException::new);
     }
 
     public void createAccount(User user) {
@@ -57,6 +62,17 @@ public class UserService implements UserDetailsService {
         }
         user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
+    }
+
+    public List<Topic> getTopics(Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        return topicService.getTopics(user);
+    }
+
+    public void addTopic(Topic topic, Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        topic.setAuthor(user);
+        topicService.addTopic(topic);
     }
 
 

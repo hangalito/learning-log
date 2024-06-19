@@ -2,37 +2,37 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Create account</title>
-    <link rel="stylesheet" th:href="@{/css/auth.css}" type="text/css" media="all">
+    <link media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
 </head>
 <body>
 <div class="form-container">
     <h1>Register</h1>
-    <form th:action="@{/register}" method="post" th:object="${user}">
+    <form method="post" th:action="@{/register}" th:object="${user}">
         <label>
             First name:
-            <input type="text" name="firstname" th:field="*{firstName}" placeholder="Firstname" required>
-            <small th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error">FIRSTNAME
+            <input name="firstname" placeholder="Firstname" required th:field="*{firstName}" type="text">
+            <small class="error" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}">FIRSTNAME
                 ERROR</small>
         </label>
         <br>
         <label>
             Last name:
-            <input type="text" name="lastname" th:field="*{lastName}" placeholder="Lastname" required>
-            <small th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error">LAST NAME</small>
+            <input name="lastname" placeholder="Lastname" required th:field="*{lastName}" type="text">
+            <small class="error" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}">LAST NAME</small>
         </label>
         <br>
         <label>
             Username:
-            <input type="text" name="username" th:field="*{username}" placeholder="Username" required>
-            <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">USERNAME</small>
+            <input name="username" placeholder="Username" required th:field="*{username}" type="text">
+            <small class="error" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">USERNAME</small>
         </label>
         <br>
         <label>
             Password:
-            <input type="password" name="password" th:field="*{password}" placeholder="Password" required>
-            <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error">PASSWORD</small>
+            <input name="password" placeholder="Password" required th:field="*{password}" type="password">
+            <small class="error" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">PASSWORD</small>
         </label>
         <br>
         <input type="submit" value="Create account">

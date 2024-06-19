@@ -1,5 +1,6 @@
 package dev.hangalito.topics.controller;
 
+import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -7,12 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
 public class HomeController {
 
     private final UserService userService;
+
+    @ModelAttribute(name = "topics")
+    public List<Topic> topics(Principal principal) {
+        return userService.getTopics(principal);
+    }
 
     @ModelAttribute(name = "username")
     public String username(Principal principal) {

@@ -12,7 +12,7 @@ nav {
 .title {
     font-style: oblique;
     color: black;
-    font-size: 24px;
+    font-size: 27px;
     font-weight: 600;
     text-decoration: none;
     padding-top: 12px;
@@ -26,17 +26,28 @@ nav {
 }
 
 .profile {
-    text-decoration: none;
-    background-color: rgba(144, 252, 154, 0.4588235294);
-    color: black;
-    padding: 12px;
     margin: 3px;
+    padding: 12px;
     border-radius: 50px;
+    color: black;
+    background-color: rgba(144, 252, 154, 0.4588235294);
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+.profile img {
+    width: 33px;
 }
 
 .profile:hover {
-    background-color: #90fc9a;
+    cursor: pointer;
     color: black;
+    background-color: #90fc9a;
 }
 
 /*# sourceMappingURL=header.css.map */

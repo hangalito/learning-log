@@ -6,7 +6,10 @@
     <a class="title" th:href="@{/}">
         <abbr th:text="${@applicationName}" th:title="${@applicationName} + ' Home'"></abbr>
     </a>
-    <a class="profile" th:href="@{/profile}" th:text="${username}"></a>
+    <a class="profile" th:href="@{/profile}">
+        <img th:alt="${username}" th:src="@{/img/user.png}">
+        <span th:text="${username}"></span>
+    </a>
 </nav>
 </body>
 </html>

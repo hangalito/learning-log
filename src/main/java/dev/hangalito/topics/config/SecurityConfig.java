@@ -26,6 +26,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/login").permitAll()
                         .requestMatchers("/register").permitAll()
                         .requestMatchers("/css/**").permitAll()
+                        .requestMatchers("/img/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
                     ;
                     auth.anyRequest().authenticated();

@@ -6,43 +6,57 @@ $textColor: black;
 
 
 nav {
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  background-color: $background;
-  border: 1px solid $backgroundInverse;
-  border-radius: 9px;
-  padding: 12px;
-  font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background-color: $background;
+    border: 1px solid $backgroundInverse;
+    border-radius: 9px;
+    padding: 12px;
+    font-family: "Roboto", sans-serif;
 }
 
 .title {
-  font-style: oblique;
-  color: $textColor;
-  font-size: 24px;
-  font-weight: 600;
-  text-decoration: none;
-  padding-top: 12px;
-  padding-bottom: 12px;
-
-  abbr {
+    font-style: oblique;
+    color: $textColor;
+    font-size: 27px;
+    font-weight: 600;
     text-decoration: none;
-    align-self: center;
-    padding: 0;
-  }
+    padding-top: 12px;
+    padding-bottom: 12px;
+
+    abbr {
+        text-decoration: none;
+        align-self: center;
+        padding: 0;
+    }
 }
 
 .profile {
-  text-decoration: none;
-  background-color: $primary;
-  color: $textColor;
-  padding: 12px;
-  margin: 3px;
-  border-radius: 50px;
+    margin: 3px;
+    padding: 12px;
+    border-radius: 50px;
+    color: $textColor;
+    background-color: $primary;
+
+    display: flex;
+    flex-flow: column wrap;
+    align-content: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    font-size: 10px;
+    text-decoration: none;
+
+    img {
+        width: 33px;
+    }
 
 }
 
 .profile:hover {
-  background-color: $primaryInverse;
-  color: $textColor;
+    cursor: pointer;
+    color: $textColor;
+    background-color: $primaryInverse;
 }
+

@@ -1,7 +1,6 @@
 package dev.hangalito.topics.service;
 
 import dev.hangalito.topics.exceptions.InvalidCredentialException;
-import dev.hangalito.topics.exceptions.UserExistsException;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -43,12 +42,11 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    public void updateAccountDetails(User user) {
-        userRepository.findAll().forEach(u -> {
-            if (user.getUsername().equalsIgnoreCase(u.getUsername())) {
-                throw new UserExistsException();
-            }
-        });
+    public void updateAccountDetails(Integer id, String firstName, String lastName) {
+        User user = userRepository.findById(id).orElseThrow(IllegalStateException::new);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        userRepository.save(user);
     }
 
     public void updatePassword(Principal principal, String currentPassword, String newPassword) throws InvalidCredentialException {

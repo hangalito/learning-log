@@ -24,11 +24,10 @@ import java.util.logging.Logger;
 @AllArgsConstructor
 public class AuthController {
 
-    private final UserService userService;
-
-    private static final String DO_NOT_MATCH       = "Passwords don't match";
-    private static final String INCORRECT_PASSWORD = "Incorrect password";
-    private static final String TOO_SHORT_PASSWORD = "Password should be at least 8 characters long";
+    private static final String      DO_NOT_MATCH       = "Passwords don't match";
+    private static final String      INCORRECT_PASSWORD = "Incorrect password";
+    private static final String      TOO_SHORT_PASSWORD = "Password should be at least 8 characters long";
+    private final        UserService userService;
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, Model model) {
@@ -65,8 +64,30 @@ public class AuthController {
 
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
-        model.addAttribute("user", userService.getUser(principal));
+        User user = userService.getUser(principal);
+        Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, user.toString());
+        model.addAttribute("id", user.getId());
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("firstName", user.getFirstName());
+        model.addAttribute("lastName", user.getLastName());
         return "auth/profile";
+    }
+
+    @PostMapping("/profile/update")
+    public String profile(
+            @RequestParam int id,
+            @RequestParam String firstName,
+            @RequestParam String lastName,
+            Model model, Principal principal
+    ) {
+        if (firstName.isBlank() || lastName.isBlank()) {
+            model.addAttribute("username", principal.getName());
+            model.addAttribute("firstNameMsg", "This field is required");
+            model.addAttribute("lastNameMsg", "This field is required");
+            return "auth/profile";
+        }
+        userService.updateAccountDetails(id, firstName, lastName);
+        return "redirect:/profile";
     }
 
     @GetMapping("/profile/credentials")

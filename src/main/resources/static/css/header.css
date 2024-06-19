@@ -1,0 +1,41 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9px;
+  padding: 12px;
+  font-family: "Roboto", sans-serif;
+}
+
+.title {
+  font-style: oblique;
+  color: black;
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.title abbr {
+  text-decoration: none;
+  align-self: center;
+  padding: 0;
+}
+
+.profile {
+  text-decoration: none;
+  background-color: rgba(144, 252, 154, 0.4588235294);
+  color: black;
+  padding: 12px;
+  margin: 3px;
+  border-radius: 50px;
+}
+
+.profile:hover {
+  background-color: #90fc9a;
+  color: black;
+}
+
+/*# sourceMappingURL=header.css.map */

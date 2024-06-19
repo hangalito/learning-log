@@ -1,0 +1,48 @@
+$primary: #90fc9a75;
+$primaryInverse: #90fc9a;
+$background: rgba(255, 255, 255, 0.5);
+$backgroundInverse: rgba(255, 255, 255, 0.3);
+$textColor: black;
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  background-color: $background;
+  border: 1px solid $backgroundInverse;
+  border-radius: 9px;
+  padding: 12px;
+  font-family: "Roboto", sans-serif;
+}
+
+.title {
+  font-style: oblique;
+  color: $textColor;
+  font-size: 24px;
+  font-weight: 600;
+  text-decoration: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+
+  abbr {
+    text-decoration: none;
+    align-self: center;
+    padding: 0;
+  }
+}
+
+.profile {
+  text-decoration: none;
+  background-color: $primary;
+  color: $textColor;
+  padding: 12px;
+  margin: 3px;
+  border-radius: 50px;
+
+}
+
+.profile:hover {
+  background-color: $primaryInverse;
+  color: $textColor;
+}

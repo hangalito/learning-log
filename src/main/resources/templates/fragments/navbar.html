@@ -1,9 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
-
+<nav th:fragment="header(username)">
+    <a class="title" th:href="@{/}">
+        <abbr th:title="${@applicationName} + ' Home'" th:text="${@applicationName}"></abbr>
+    </a>
+    <a href="#" class="profile" th:text="${username}"></a>
+</nav>
 </body>
 </html>

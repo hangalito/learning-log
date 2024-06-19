@@ -2,10 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topics</title>
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css" media="all">
+    <script th:src="@{/js/script.js}" type="text/javascript" async></script>
 </head>
 <body>
-<h1 th:text="${@applicationName}"></h1>
+<div th:replace="~{fragments/navbar::header (${username})}"></div>
 <p th:text="'Welcome back, ' + ${username}"></p>
 </body>
 </html>

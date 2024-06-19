@@ -9,26 +9,33 @@
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header(${username})}"></div>
-<h1>Edit details</h1>
-<form method="post" th:action="@{/profile/update}">
+<div>
+    <h1>Edit details</h1>
+    <form method="post" th:action="@{/profile/update}">
 
-    <input name="id" th:value="${id}" type="hidden">
+        <input name="id" th:value="${id}" type="hidden">
 
-    <label for="firstName">First name: </label>
-    <input id="firstName" name="firstName" placeholder="Enter your first name" required th:value="${firstName}"
-           type="text">
-    <small class="error" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
+        <label for="firstName">First name: </label>
+        <input id="firstName" name="firstName" placeholder="Enter your first name" required th:value="${firstName}"
+               type="text">
+        <small class="error" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
 
-    <br>
-    <label for="lastName">Last name: </label>
-    <input id="lastName" name="lastName" placeholder="Enter your last name" required th:value="${lastName}" type="text">
-    <small class="error" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
+        <br>
+        <label for="lastName">Last name: </label>
+        <input id="lastName" name="lastName" placeholder="Enter your last name" required th:value="${lastName}"
+               type="text">
+        <small class="error" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
+
+        <br>
+        <input type="submit" value="Update">
+    </form>
 
     <br>
     <a th:href="@{/profile/credentials}">Update password</a>
 
     <br>
-    <input type="submit" value="Update">
-</form>
+    <a th:href="@{/logout}">Logout</a>
+
+</div>
 </body>
 </html>

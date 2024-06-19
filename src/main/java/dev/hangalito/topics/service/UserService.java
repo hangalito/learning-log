@@ -1,8 +1,11 @@
 package dev.hangalito.topics.service;
 
+import dev.hangalito.topics.exceptions.InvalidCredentialException;
+import dev.hangalito.topics.exceptions.UserExistsException;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -10,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
+
+@Slf4j
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -28,9 +34,32 @@ public class UserService implements UserDetailsService {
                     .build();
     }
 
+    public User getUser(Principal principal) {
+        return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+    }
+
     public void createAccount(User user) {
         user.setPassword(encoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    public void updateAccountDetails(User user) {
+        userRepository.findAll().forEach(u -> {
+            if (user.getUsername().equalsIgnoreCase(u.getUsername())) {
+                throw new UserExistsException();
+            }
+        });
+    }
+
+    public void updatePassword(Principal principal, String currentPassword, String newPassword) throws InvalidCredentialException {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        if (!encoder.matches(currentPassword, user.getPassword())) {
+            log.debug("Incorrect password");
+            throw new InvalidCredentialException("Incorrect password");
+        }
+        user.setPassword(encoder.encode(newPassword));
+        userRepository.save(user);
+    }
+
 
 }

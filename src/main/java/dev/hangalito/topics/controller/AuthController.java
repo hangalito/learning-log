@@ -1,5 +1,6 @@
 package dev.hangalito.topics.controller;
 
+import dev.hangalito.topics.exceptions.InvalidCredentialException;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Slf4j
 @Controller
@@ -21,6 +25,10 @@ import java.util.Objects;
 public class AuthController {
 
     private final UserService userService;
+
+    private static final String DO_NOT_MATCH       = "Passwords don't match";
+    private static final String INCORRECT_PASSWORD = "Incorrect password";
+    private static final String TOO_SHORT_PASSWORD = "Password should be at least 8 characters long";
 
     @GetMapping("/login")
     public String login(@RequestParam(required = false) String error, Model model) {
@@ -53,6 +61,68 @@ public class AuthController {
     public String logout(HttpSession session) {
         session.invalidate();
         return "redirect:/login";
+    }
+
+    @GetMapping("/profile")
+    public String profile(Principal principal, Model model) {
+        model.addAttribute("user", userService.getUser(principal));
+        return "auth/profile";
+    }
+
+    @GetMapping("/profile/credentials")
+    public String credentials(
+            @RequestParam(required = false) String error,
+            Principal principal,
+            Model model,
+            HttpSession session
+    ) {
+        model.addAttribute("user", userService.getUser(principal));
+
+        if (error != null) {
+            String invalid       = (String) session.getAttribute(INCORRECT_PASSWORD);
+            String shortPassword = (String) session.getAttribute(TOO_SHORT_PASSWORD);
+            String doNotMatch    = (String) session.getAttribute(DO_NOT_MATCH);
+
+            if (invalid != null) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, invalid);
+                model.addAttribute("currentPasswordError", invalid);
+            }
+            if (shortPassword != null) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, shortPassword);
+                model.addAttribute("shortMessage", shortPassword);
+            }
+            if (doNotMatch != null) {
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, doNotMatch);
+                model.addAttribute("error", doNotMatch);
+            }
+        }
+
+        return "auth/credentials";
+    }
+
+    @PostMapping("/profile/credentials")
+    public String credentials(
+            @RequestParam String currentPassword,
+            @RequestParam String newPassword,
+            @RequestParam String newPasswordConfirm,
+            Principal principal,
+            HttpSession session
+    ) {
+        if (newPassword.length() < 8) {
+            session.setAttribute(TOO_SHORT_PASSWORD, TOO_SHORT_PASSWORD);
+            return "redirect:/profile/credentials?error";
+        } else if (!Objects.equals(newPassword, newPasswordConfirm)) {
+            session.setAttribute(DO_NOT_MATCH, DO_NOT_MATCH);
+            return "redirect:/profile/credentials?error";
+        } else {
+            try {
+                userService.updatePassword(principal, currentPassword, newPassword);
+            } catch (InvalidCredentialException exception) {
+                session.setAttribute(INCORRECT_PASSWORD, INCORRECT_PASSWORD);
+                return "redirect:/profile/credentials?error";
+            }
+        }
+        return "redirect:/profile";
     }
 
 }

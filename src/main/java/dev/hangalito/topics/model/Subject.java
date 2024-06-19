@@ -40,7 +40,8 @@ public class Subject {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Subject subject = (Subject) o;
-        return Objects.equals(getId(), subject.getId()) && Objects.equals(getContent(), subject.getContent()) && Objects.equals(getTopic(), subject.getTopic()) && Objects.equals(getAuthor(), subject.getAuthor());
+        return Objects.equals(getId(), subject.getId()) && Objects.equals(getContent(), subject.getContent()) &&
+               Objects.equals(getTopic(), subject.getTopic()) && Objects.equals(getAuthor(), subject.getAuthor());
     }
 
     @Override

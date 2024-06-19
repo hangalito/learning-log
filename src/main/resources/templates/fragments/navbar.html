@@ -8,7 +8,7 @@
     <a class="title" th:href="@{/}">
         <abbr th:title="${@applicationName} + ' Home'" th:text="${@applicationName}"></abbr>
     </a>
-    <a href="#" class="profile" th:text="${username}"></a>
+    <a th:href="@{/profile}" class="profile" th:text="${username}"></a>
 </nav>
 </body>
 </html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/header.css}" type="text/css" media="all">
+</head>
+<body>
+<div th:replace="~{fragments/navbar::header(${user.username})}"></div>
+<h1>Edit details</h1>
+<form th:object="${user}" method="post">
+    <label for="firstName">First name: </label>
+    <input type="text" name="firstName" id="firstName" th:field="*{firstName}">
+
+    <br>
+    <label for="lastName">Last name: </label>
+    <input type="text" name="firstName" id="lastName" th:field="*{lastName}">
+
+    <br>
+    <label for="username">Username: </label>
+    <input type="text" name="firstName" id="username" th:field="*{username}">
+
+    <br>
+    <a th:href="@{/profile/credentials}">Update password</a>
+
+    <br>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>

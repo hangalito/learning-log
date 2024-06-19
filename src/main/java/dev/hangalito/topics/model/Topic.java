@@ -34,7 +34,8 @@ public class Topic {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Topic topic = (Topic) o;
-        return Objects.equals(getId(), topic.getId()) && Objects.equals(getName(), topic.getName()) && Objects.equals(getAuthor(), topic.getAuthor());
+        return Objects.equals(getId(), topic.getId()) && Objects.equals(getName(), topic.getName()) && Objects.equals(
+                getAuthor(), topic.getAuthor());
     }
 
     @Override

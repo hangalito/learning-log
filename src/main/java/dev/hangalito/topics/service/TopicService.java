@@ -30,18 +30,6 @@ class TopicService {
         topicRepository.save(topic);
     }
 
-    public Topic getTopic(String name, User author) {
-        return topicRepository.findByAuthorAndName(author, name).orElseThrow(IllegalStateException::new);
-    }
-
-    public Topic getTopic(int id, User author) {
-        return topicRepository.findByAuthorAndId(author, id).orElseThrow(IllegalStateException::new);
-    }
-
-    public void deleteTopic(Topic topic, User author) {
-        topicRepository.deleteByNameAndAuthor(topic.getName(), author);
-    }
-
     public void deleteById(int id) {
         topicRepository.deleteById(id);
     }

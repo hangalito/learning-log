@@ -14,8 +14,7 @@ $dangerInverse: rgba(255, 20, 20, 0.81);
 
 $defaultFont: "Roboto", sans-serif;
 
-body {
-    background-color: $background;
+main {
     border-radius: 12px;
     padding: 6px;
     font-family: $defaultFont;
@@ -38,7 +37,7 @@ body {
     margin: 3px;
     width: 200px;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-grow: 0;
 
     a {
         background-color: $secondary;
@@ -80,11 +79,23 @@ body {
 }
 
 
-.primary {
+.btn-primary {
     background-color: $primary;
     margin: 42px 0;
 }
 
-.primary:hover {
+.btn-primary:hover {
     background-color: $primaryInverse;
+}
+
+.fab {
+    position: fixed;
+    right: 1%;
+    bottom: 1%;
+    top: 92%;
+    left: 92%;
+    color: $foreground;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 21px;
 }

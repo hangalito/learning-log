@@ -28,7 +28,7 @@ public class User {
     @NotBlank(message = "Last name is required")
     @Column(name = "last_name")
     String lastName;
-    @Size(min = 6, max = 15, message = "Username me between 6 and 15 characters long")
+    @Size(min = 4, max = 15, message = "Username me between 4 and 15 characters long")
     @Column(name = "username", unique = true)
     String username;
     @Size(min = 8, message = "Password should be at least 8 characters long")

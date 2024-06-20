@@ -20,23 +20,28 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Table(name = "user")
 public class User {
 
-    @Size(max = 45, message = "First name must not be longer than 45 characters")
-    @NotBlank(message = "First name is required")
-    @Column(name = "first_name")
-    String firstName;
-    @Size(max = 45, message = "Last name must not be longer than 45 characters")
-    @NotBlank(message = "Last name is required")
-    @Column(name = "last_name")
-    String lastName;
-    @Size(min = 4, max = 15, message = "Username me between 4 and 15 characters long")
-    @Column(name = "username", unique = true)
-    String username;
-    @Size(min = 8, message = "Password should be at least 8 characters long")
-    @NotBlank(message = "Password is required")
-    String password;
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
+
+    @Size(max = 45, message = "First name must not be longer than 45 characters")
+    @NotBlank(message = "First name is required")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Size(max = 45, message = "Last name must not be longer than 45 characters")
+    @NotBlank(message = "Last name is required")
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Size(min = 4, max = 15, message = "Username me between 4 and 15 characters long")
+    @Column(name = "username", unique = true)
+    private String username;
+
+    @Size(min = 8, message = "Password should be at least 8 characters long")
+    @NotBlank(message = "Password is required")
+    private String password;
+
 
     @Override
     public boolean equals(Object o) {

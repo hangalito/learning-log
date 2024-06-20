@@ -26,6 +26,11 @@ public class HomeController {
         return principal.getName();
     }
 
+    @ModelAttribute(name = "newTopic")
+    public Topic newTopic() {
+        return new Topic();
+    }
+
     @GetMapping("/home")
     public String home() {
         return "home";

@@ -6,10 +6,43 @@
     <title>Topics</title>
     <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
     <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
     <script async th:src="@{/js/script.js}" type="text/javascript"></script>
+
+    <style>
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header (${username})}"></div>
+<dialog>
+    <div class="modal-header">
+        <p class="modal-title">Add new topic</p>
+    </div>
+    <div class="modal-main">
+        <form method="post" th:action="@{/topic/new}" th:object="${newTopic}">
+            <label for="topicName">
+                Topic name
+                <abbr title="Write the title of your new topic. Topics should not be longer than 70 characters.">&#128712;</abbr>
+            </label>
+            <br>
+            <input autocomplete="off" autofocus enterkeyhint="done" id="topicName" inputmode="text" name="topicName"
+                   placeholder="Topic" required th:field="*{name}" type="text">
+            <br>
+            <small class="error" style="display: none">Cannot create an empty topic</small>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-button" formmethod="dialog" id="modal-button-cancel">Cancel</button>
+        <button class="modal-button" id="modal-button-confirm">Add topic</button>
+    </div>
+</dialog>
 <main>
     <div class="card-list">
         <div class="topic-card" th:each="topic : ${topics}">
@@ -26,7 +59,7 @@
             </div>
         </div>
     </div>
-    <a class="fab" th:href="@{/topic/new}">Add topic</a>
+    <a class="fab">Add topic</a>
 </main>
 </body>
 </html>

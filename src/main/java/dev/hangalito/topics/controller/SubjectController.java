@@ -1,13 +1,13 @@
 package dev.hangalito.topics.controller;
 
 import dev.hangalito.topics.service.UserService;
-import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -23,20 +23,15 @@ public class SubjectController {
     }
 
     @GetMapping("/subjects")
-    public String subjects(Principal principal, Model model, HttpSession session) {
-        String attr = ((String) session.getAttribute("topic"));
-        if (attr == null) {
-            model.addAttribute("subjects", userService.getSubjects(principal));
-        } else {
-            model.addAttribute("subjects", userService.getSubjects(principal, attr));
-        }
+    public String subjects(Model model, Principal principal) {
+        model.addAttribute("subjects", userService.getSubjects(principal));
         return "subjects";
     }
 
-    @GetMapping("/subjects/{topic}")
-    public String subjects(@PathVariable String topic, Principal principal, Model model, HttpSession session) {
-        session.setAttribute("topic", topic);
-        return "redirect:/subjects";
+    @PostMapping("/subjects")
+    public String subjects(@RequestParam String topic, Model model, Principal principal) {
+        model.addAttribute("subjects", userService.getSubjects(principal, topic));
+        return "subjects";
     }
 
 }

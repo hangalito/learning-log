@@ -14,14 +14,16 @@
     <div class="card-list">
         <div class="topic-card" th:each="topic : ${topics}">
             <h2 th:text="${topic.name}">TOPIC NAME</h2>
-            <form method="post" th:action="@{/subjects}">
-                <input name="topic" th:value="${topic.name}" type="hidden">
-                <input class="btn btn-primary" th:value="Subjects" type="submit">
-            </form>
-            <form method="post" th:action="@{/topic/delete}">
-                <input name="id" th:value="${topic.id}" type="hidden">
-                <input class="btn danger" th:value="Delete" type="submit">
-            </form>
+            <div class="option">
+                <form class="option" method="post" th:action="@{/subjects}">
+                    <input name="topic" th:value="${topic.name}" type="hidden">
+                    <input class="btn btn-primary" th:value="Subjects" type="submit">
+                </form>
+                <form class="option" method="post" th:action="@{/topic/delete}">
+                    <input name="id" th:value="${topic.id}" type="hidden">
+                    <input class="btn danger" th:value="Delete" type="submit">
+                </form>
+            </div>
         </div>
     </div>
     <a class="fab" th:href="@{/topic/new}">Add topic</a>

@@ -39,23 +39,9 @@ main {
     flex-shrink: 0;
     flex-grow: 1;
 
-    a {
-        background-color: $secondary;
-        color: $foreground;
-    }
-
-    a:hover {
-        background-color: $secondaryInverse;
-    }
-
-    .danger {
-        background-color: $danger;
-
-    }
-
-    .danger:hover {
-        background-color: $dangerInverse;
-        box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2);
+    .option {
+        display: flex;
+        flex-flow: column wrap;
     }
 }
 
@@ -76,13 +62,22 @@ main {
 
 .btn:hover {
     cursor: pointer;
-    box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.danger {
+    background-color: $danger;
+
+}
+
+.danger:hover {
+    background-color: $dangerInverse;
+    box-shadow: 0 3px 1px 2px rgba(0, 0, 0, 0.2);
+}
 
 .btn-primary {
     background-color: $primary;
-    margin: 42px 0;
+    margin: 4px;
 }
 
 .btn-primary:hover {
@@ -94,9 +89,13 @@ main {
     right: 1%;
     bottom: 1%;
     top: 92%;
-    left: 92%;
-    color: $foreground;
-    border: 1px solid black;
+    left: 94%;
+    background-color: $background;
     text-align: center;
     border-radius: 21px;
+    line-height: 400%;
+}
+
+.fab:hover {
+    background-color: $cardColor;
 }

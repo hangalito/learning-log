@@ -99,3 +99,12 @@ main {
 .fab:hover {
     background-color: $cardColor;
 }
+
+
+abbr {
+    text-decoration: none;
+}
+
+abbr:hover {
+    cursor: pointer;
+}

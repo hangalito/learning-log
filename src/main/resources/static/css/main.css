@@ -82,4 +82,12 @@ main a {
     background-color: #a1cdc8;
 }
 
+abbr {
+    text-decoration: none;
+}
+
+abbr:hover {
+    cursor: pointer;
+}
+
 /*# sourceMappingURL=main.css.map */

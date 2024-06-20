@@ -1,4 +1,4 @@
-nav {
+header {
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -9,19 +9,34 @@ nav {
   font-family: "Roboto", sans-serif;
 }
 
+nav {
+  display: flex;
+  justify-content: space-around;
+  justify-items: flex-start;
+  align-items: baseline;
+}
+
 .title {
   font-style: oblique;
   color: black;
   font-size: 27px;
   font-weight: 600;
   text-decoration: none;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding: 12px;
+  margin: 2px;
 }
 .title abbr {
   text-decoration: none;
   align-self: center;
   padding: 0;
+}
+
+.nav-item {
+  font-size: 18px;
+  text-decoration: none;
+  color: black;
+  padding: 12px;
+  margin: 2px;
 }
 
 .profile {

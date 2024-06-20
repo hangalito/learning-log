@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Subjects</title>
+    <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+</head>
+<body>
+<div th:replace="~{fragments/navbar::header(${username})}"></div>
+<main>
+    <div th:each="subject : ${subjects}">
+        <p th:text="${subject.content}"></p>
+        <p>
+            <strong>Topic:</strong>
+            <span th:text="${subject.topic.name}"></span>
+        </p>
+    </div>
+</main>
+</body>
+</html>

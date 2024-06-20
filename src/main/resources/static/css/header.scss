@@ -5,7 +5,7 @@ $backgroundInverse: rgba(255, 255, 255, 0.3);
 $textColor: black;
 
 
-nav {
+header {
     display: flex;
     justify-content: space-between;
     align-content: center;
@@ -16,20 +16,35 @@ nav {
     font-family: "Roboto", sans-serif;
 }
 
+nav {
+    display: flex;
+    justify-content: space-around;
+    justify-items: flex-start;
+    align-items: baseline;
+}
+
 .title {
     font-style: oblique;
     color: $textColor;
     font-size: 27px;
     font-weight: 600;
     text-decoration: none;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    padding: 12px;
+    margin: 2px;
 
     abbr {
         text-decoration: none;
         align-self: center;
         padding: 0;
     }
+}
+
+.nav-item {
+    font-size: 18px;
+    text-decoration: none;
+    color: $textColor;
+    padding: 12px;
+    margin: 2px;
 }
 
 .profile {

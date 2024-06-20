@@ -14,7 +14,7 @@
     <div class="card-list">
         <form class="topic-card" method="post" th:action="@{/topic/delete}" th:each="topic : ${topics}">
             <h2 th:text="${topic.name}">TOPIC NAME</h2>
-            <a class="btn secondary" href="#">Subjects</a>
+            <a class="btn secondary" th:href="@{/subjects/{topic}(topic=${topic.name})}">Subjects</a>
             <input name="id" th:value="${topic.id}" type="hidden">
             <input class="btn danger" th:value="Delete" type="submit">
         </form>

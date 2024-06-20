@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,10 @@ class TopicService {
         topicRepository.findByAuthor(author).forEach(topics::add);
         topics.sort(Comparator.comparing(Topic::getName));
         return topics;
+    }
+
+    public Optional<Topic> getTopic(User author, String name) {
+        return topicRepository.findByAuthorAndName(author, name);
     }
 
     public void addTopic(Topic topic) {

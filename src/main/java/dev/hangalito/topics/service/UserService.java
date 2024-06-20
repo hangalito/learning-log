@@ -1,6 +1,7 @@
 package dev.hangalito.topics.service;
 
 import dev.hangalito.topics.exceptions.InvalidCredentialException;
+import dev.hangalito.topics.model.Subject;
 import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
@@ -23,6 +24,7 @@ public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final TopicService   topicService;
+    private final SubjectService subjectService;
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -74,6 +76,17 @@ public class UserService implements UserDetailsService {
     public void deleteTopic(int id, Principal principal) {
         userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
         topicService.deleteById(id);
+    }
+
+    public List<Subject> getSubjects(Principal principal) {
+        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        return subjectService.getSubjects(user);
+    }
+
+    public List<Subject> getSubjects(Principal principal, String topicName) {
+        User  user  = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+        Topic topic = topicService.getTopic(user, topicName).orElseThrow(IllegalStateException::new);
+        return subjectService.getSubjectByTopic(topic, user);
     }
 
 }

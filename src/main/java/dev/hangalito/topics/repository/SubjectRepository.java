@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface SubjectRepository extends CrudRepository<Subject, Integer> {
 
-    Iterable<Subject> findByTopic(Topic topic);
+    Iterable<Subject> findByAuthor(User author);
 
     Iterable<Subject> findByTopicAndAuthor(Topic topic, User author);
 

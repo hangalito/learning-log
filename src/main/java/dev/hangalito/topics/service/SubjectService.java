@@ -18,14 +18,14 @@ class SubjectService {
     private final SubjectRepository subjectRepository;
 
     public List<Subject> getSubjects(User user) {
-        List<Subject> subjects = new ArrayList<Subject>();
+        List<Subject> subjects = new ArrayList<>();
         subjectRepository.findByAuthor(user).forEach(subjects::add);
         subjects.sort(Comparator.comparing(Subject::getContent));
         return subjects;
     }
 
     public List<Subject> getSubjectByTopic(Topic topic, User user) {
-        List<Subject> subjects = new ArrayList<Subject>();
+        List<Subject> subjects = new ArrayList<>();
         subjectRepository.findByTopicAndAuthor(topic, user).forEach(subjects::add);
         subjects.sort(Comparator.comparing(Subject::getContent));
         return subjects;

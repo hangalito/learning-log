@@ -1,6 +1,6 @@
 spring:
   application:
-    name: Topics
+    name: Learning Log
   profiles:
     group:
       default:
@@ -17,8 +17,15 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+  session:
+    timeout: 14d
+
 logging:
   level:
-    web: info
-    org.springframework.web: info
+    web: debug
+    org.springframework.web: debug
     org.springframework.security: debug
+    jakarta.persistence: debug
+    jakarta.validation: debug
+    sql: debug
+    root: debug

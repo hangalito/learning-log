@@ -8,12 +8,8 @@ import java.util.Optional;
 
 public interface TopicRepository extends CrudRepository<Topic, Integer> {
 
-    Iterable<Topic> findByAuthor(User author);
+    Iterable<Topic> findByAuthorOrderByName(User author);
 
-    Optional<Topic> findByAuthorAndName(User author, String name);
-
-    Optional<Topic> findByAuthorAndId(User author, int id);
-
-    void deleteByNameAndAuthor(String name, User author);
+    Optional<Topic> findByAuthorAndNameOrderByName(User author, String name);
 
 }

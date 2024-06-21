@@ -9,6 +9,8 @@ public interface SubjectRepository extends CrudRepository<Subject, Integer> {
 
     Iterable<Subject> findByAuthor(User author);
 
-    Iterable<Subject> findByTopicAndAuthor(Topic topic, User author);
+    Iterable<Subject> findByAuthorOrderByContent(User author);
+
+    Iterable<Subject> findByTopicAndAuthorOrderByContent(Topic topic, User author);
 
 }

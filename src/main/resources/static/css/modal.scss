@@ -12,6 +12,15 @@ dialog {
     border-radius: 21px;
     border: .5px solid rgba(10, 10, 10, .4);
     padding: 3px 27px 3px 27px;
+
+    label {
+        font-size: $label;
+        display: block;
+    }
+
+    .form-input {
+        padding: $paddingSmall;
+    }
 }
 
 dialog::backdrop {
@@ -27,8 +36,8 @@ dialog::backdrop {
 .modal-main {
     padding: $paddingLarge;
 
-    input[type="text"] {
-        margin-top: 0;
+    .form-input input {
+        margin-top: $paddingSmall;
         padding: $paddingMedium;
         font-size: $body;
 

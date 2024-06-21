@@ -6,37 +6,81 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
     <link media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+    <script async th:src="@{/js/modals.js}" type="text/javascript"></script>
+    <script async th:src="@{/js/credentials.js}" type="text/javascript"></script>
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header(${username})}"></div>
-<div>
-    <h1>Edit details</h1>
-    <form method="post" th:action="@{/profile/update}">
+<dialog>
+    <div class="modal-header">
+        <p class="modal-title">Change password</p>
+    </div>
+    <div class="modal-main">
+        <form method="post" th:action="@{/profile/credentials}">
+            <div class="form-input"><label for="currentPassword">Current password: </label>
+                <input id="currentPassword" name="currentPassword"
+                       placeholder="Enter your current password"
+                       required type="password">
+                <br>
+                <small class="error label-error" id="oldLabel"
+                       th:if="${currentPasswordError}" th:text="${currentPasswordError}"></small>
+            </div>
 
-        <input name="id" th:value="${id}" type="hidden">
+            <div class="form-input">
+                <label for="newPassword">New password: </label>
+                <input id="newPassword" name="newPassword" placeholder="Enter your new password"
+                       required type="password">
+                <br>
+                <small class="error label-error" id="newLabel" th:if="${shortMessage}"
+                       th:text="${shortMessage}"></small>
+            </div>
 
-        <label for="firstName">First name: </label>
-        <input id="firstName" name="firstName" placeholder="Enter your first name" required th:value="${firstName}"
-               type="text">
-        <small class="error" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
+            <div class="form-input"><label for="newPasswordConfirm">Confirm your password: </label>
+                <input id="newPasswordConfirm" name="newPasswordConfirm"
+                       placeholder="Confirm your new password" required
+                       type="password">
+                <br>
+                <small class="error label-error" id="newLabel2" th:if="${error}" th:text="${error}"></small>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-button" formmethod="dialog" id="modal-button-cancel">Cancel</button>
+        <button class="modal-button" id="modal-button-confirm">Change</button>
+    </div>
+</dialog>
+<main>
+    <div>
+        <h1>Edit details</h1>
+        <form method="post" th:action="@{/profile/update}">
+
+            <input name="id" th:value="${id}" type="hidden">
+
+            <label for="firstName">First name: </label>
+            <input id="firstName" name="firstName" placeholder="Enter your first name" required th:value="${firstName}"
+                   type="text">
+            <small class="error" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
+
+            <br>
+            <label for="lastName">Last name: </label>
+            <input id="lastName" name="lastName" placeholder="Enter your last name" required th:value="${lastName}"
+                   type="text">
+            <small class="error" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
+
+            <br>
+            <input type="submit" value="Update">
+        </form>
 
         <br>
-        <label for="lastName">Last name: </label>
-        <input id="lastName" name="lastName" placeholder="Enter your last name" required th:value="${lastName}"
-               type="text">
-        <small class="error" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
+        <button class="btn btn-primary" id="fab">Update password</button>
 
         <br>
-        <input type="submit" value="Update">
-    </form>
+        <a class="btn danger" th:href="@{/logout}">Logout</a>
 
-    <br>
-    <a th:href="@{/profile/credentials}">Update password</a>
-
-    <br>
-    <a th:href="@{/logout}">Logout</a>
-
-</div>
+    </div>
+</main>
 </body>
 </html>

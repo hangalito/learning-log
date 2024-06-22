@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Topics</title>
+    <title th:text="${@applicationName} + ' | Home'"></title>
     <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
     <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
     <link media="all" rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
@@ -49,10 +49,7 @@
         <div class="topic-card" th:each="topic : ${topics}">
             <h2 th:text="${topic.name}">TOPIC NAME</h2>
             <div class="option">
-                <form class="option" method="post" th:action="@{/subjects}">
-                    <input name="topic" th:value="${topic.name}" type="hidden">
-                    <input class="btn btn-primary" th:value="Subjects" type="submit">
-                </form>
+                <a class="btn btn-primary" th:href="@{/topics/{topicName}(topicName=${topic.name})}">Subjects</a>
                 <form class="option" method="post" th:action="@{/topic/delete}">
                     <input name="id" th:value="${topic.id}" type="hidden">
                     <input class="btn danger" th:value="Delete" type="submit">

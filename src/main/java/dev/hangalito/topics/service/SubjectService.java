@@ -24,6 +24,8 @@ class SubjectService {
     }
 
     public void addSubject(Subject subject) {
+        if (subject.getAuthor() == null) throw new IllegalStateException("Cannot add a Subject with a null author");
+        if (subject.getTopic() == null) throw new IllegalStateException("Cannot add a Subject with a null topic");
         subjectRepository.save(subject);
     }
 

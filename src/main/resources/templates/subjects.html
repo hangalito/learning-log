@@ -28,7 +28,7 @@
             <input name="topicName" th:if="${topic}!=null" th:value="${topic.name}" type="hidden">
 
             <br>
-            <select name="topic" th:if="${topic}==null" th:label="Exception">
+            <select name="topic" required th:if="${topic}==null" th:label="Exception">
                 <option value="none">--Select a topic--</option>
                 <option th:each="t : ${topics}" th:text="${t.name}" th:value="${t.id}"></option>
             </select>

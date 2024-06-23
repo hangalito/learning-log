@@ -6,6 +6,12 @@
     <title th:text="${title}"></title>
     <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
+
+    <style>
+        .title {
+            margin: 8rem 0 0 4rem;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header(${username})}"></div>
@@ -41,6 +47,7 @@
     </div>
 </dialog>
 <main>
+    <p class="title" th:text="${msg}"></p>
     <div class="card-container">
         <div th:each="subject : ${subjects}">
             <div th:replace="~{fragments/cards::subject-card(${subject})}"></div>

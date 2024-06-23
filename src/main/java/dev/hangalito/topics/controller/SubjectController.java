@@ -43,8 +43,14 @@ public class SubjectController {
 
     @GetMapping("/subjects")
     public String subjects(Model model, Principal principal) {
-        model.addAttribute("subjects", userService.getSubjects(principal));
+        List<Subject> subjects = userService.getSubjects(principal);
+        model.addAttribute("subjects", subjects);
         model.addAttribute("title", "All subjects");
+        if (subjects.isEmpty()) {
+            model.addAttribute("msg", "You have no topics saved yet");
+        } else {
+            model.addAttribute("msg", "All saved subjects");
+        }
         return "subjects";
     }
 
@@ -55,6 +61,11 @@ public class SubjectController {
         model.addAttribute("subjects", subjects);
         model.addAttribute("topic", topic);
         model.addAttribute("title", topicName);
+        if (subjects.isEmpty()) {
+            model.addAttribute("msg", "There's nothing to see here");
+        } else {
+            model.addAttribute("msg", topic.getName() + "'s subjects");
+        }
         return "subjects";
     }
 

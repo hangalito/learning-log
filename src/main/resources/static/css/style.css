@@ -255,6 +255,47 @@ dialog::backdrop {
     content: "+";
 }
 
+.subject-card {
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: space-between;
+    gap: 0.4em;
+    padding: 1.2em;
+    box-shadow: 0 0 12px rgba(3, 3, 3, 0.1);
+    border-radius: 12px;
+}
+
+.subject-card .subject-card_top .subject-card__title {
+    font-size: 1.4625rem;
+    font-weight: 500;
+}
+
+.subject-card .subject-card_bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: end;
+}
+
+.subject-card .subject-card_bottom .subject-card__anchor {
+    font-weight: 400;
+    font-size: 0.975rem;
+    font-style: oblique;
+    color: #94dcf9;
+    padding: 0;
+    margin: 0;
+}
+
+.subject-card .subject-card_bottom .subject-card__actions {
+    display: flex;
+    gap: 0.4em;
+}
+
+.subject-card .subject-card_bottom .subject-card__actions * {
+    margin: 0;
+}
+
 body {
     font-family: "Roboto", "sans-serif";
 }

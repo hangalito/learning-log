@@ -15,17 +15,6 @@ spring:
   jpa:
     database: mysql
     show-sql: true
-    hibernate:
-      ddl-auto: none
+    generate-ddl: off
   session:
     timeout: 14d
-
-logging:
-  level:
-    web: debug
-    org.springframework.web: debug
-    org.springframework.security: debug
-    jakarta.persistence: debug
-    jakarta.validation: debug
-    sql: debug
-    root: debug

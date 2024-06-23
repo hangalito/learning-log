@@ -68,6 +68,9 @@
     margin: .75em 0;
     font-family: $defaultFont !important;
     box-sizing: border-box;
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .btn {
@@ -182,4 +185,24 @@ dialog {
     &::backdrop {
         background-color: rgba(3, 3, 3, .81);
     }
+}
+
+
+.fab {
+    @include button;
+    color: white;
+    width: 4.5rem;
+    height: 4.5rem;
+    line-height: 100%;
+    text-align: center;
+    align-content: center;
+
+    border: 0;
+    border-radius: 50%;
+
+    margin: 1em;
+
+    position: fixed;
+    bottom: 0;
+    right: 0;
 }

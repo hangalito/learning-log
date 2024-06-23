@@ -7,36 +7,44 @@
     <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
     <script async th:src="@{/js/script.js}" type="text/javascript"></script>
+    <style>
+        #profile-form-footer {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 1fr);
+            margin: 1.5em;
+            gap: 6px;
+        }
+
+        #profile-form-footer * {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header(${username})}"></div>
-<div>
-    <h1>Edit details</h1>
-    <form method="post" th:action="@{/profile/update}">
+<main>
+    <form class="container" method="post" th:action="@{/profile/update}">
+        <h1 class="title">Edit account details</h1>
 
         <input name="id" th:value="${id}" type="hidden">
+        <div class="form-input">
+            <label class="label" for="firstName">First name </label>
+            <input id="firstName" name="firstName" required th:value="${firstName}" type="text">
+            <small class="error label" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
+        </div>
+        <div class="form-input">
+            <label class="label" for="lastName">Last name </label>
+            <input autocomplete="none" enterkeyhint="next" id="lastName" name="lastName" required
+                   th:value="${lastName}" type="text">
+            <small class="error label" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
+        </div>
 
-        <label for="firstName">First name: </label>
-        <input id="firstName" name="firstName" placeholder="Enter your first name" required th:value="${firstName}"
-               type="text">
-        <small class="error" th:if="${firstNameMsg}" th:text="${firstNameMsg}"></small>
-
-        <br>
-        <label for="lastName">Last name: </label>
-        <input id="lastName" name="lastName" placeholder="Enter your last name" required th:value="${lastName}"
-               type="text">
-        <small class="error" th:if="${lastNameMsg}" th:text="${lastNameMsg}"></small>
-
-        <br>
-        <input type="submit" value="Update">
+        <div id="profile-form-footer">
+            <input class="btn-form" type="submit" value="Update">
+            <a class="btn-form" th:href="@{/profile/credentials}">Update password</a>
+            <a class="btn-form-danger" th:href="@{/logout}">Logout</a>
+        </div>
     </form>
-
-    <br>
-    <a th:href="@{/profile/credentials}">Update password</a>
-
-    <br>
-    <a th:href="@{/logout}">Logout</a>
-
-</div>
+</main>
 </body>
 </html>

@@ -119,6 +119,26 @@
     @include btn-hover($secondary);
 }
 
+.btn-form {
+    @extend .btn;
+    text-align: center;
+    box-shadow: 3px 3px 12px rgba(3, 3, 3, .3);
+
+    &:hover {
+        background-color: darken($buttonColor, 21);
+    }
+}
+
+.btn-form-danger {
+    @extend .btn-form;
+    background-color: $error;
+    box-shadow: 3px 3px 12px rgba(3, 3, 3, .3);
+
+    &:hover {
+        background-color: darken($error, 21);
+    }
+}
+
 .card-container {
     padding: 6em 1em;
     display: grid;

@@ -5,9 +5,10 @@ import dev.hangalito.topics.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 
@@ -29,8 +30,8 @@ public class TopicController {
     }
 
 
-    @PostMapping("/topic/delete")
-    public String deleteTopic(@RequestParam int id, Principal principal) {
+    @GetMapping("/topic/delete/{id}")
+    public String deleteTopic(@PathVariable int id, Principal principal) {
         userService.deleteTopic(id, principal);
         return "redirect:/home";
     }

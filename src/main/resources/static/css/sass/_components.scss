@@ -34,3 +34,73 @@
         }
     }
 }
+
+@keyframes buttonAnimation {
+    from {
+        scale: 1;
+    }
+    to {
+        scale: 1.2;
+    }
+}
+
+@mixin btn-hover($color: $primary) {
+    &:hover {
+        background-color: darken($color, 15) !important;
+        animation: buttonAnimation 300ms ease-out;
+        scale: 1.2;
+        box-shadow: 3px 3px 12px rgba(0, 0, 0, .6);
+    }
+}
+
+.btn-error {
+    @extend .btn;
+    color: white !important;
+    background-color: $error !important;
+    @include btn-hover($error);
+}
+
+.btn-alert {
+    @extend .btn;
+    @include btn-hover($primary);
+}
+
+.btn-secondary {
+    @extend .btn;
+    background-color: $secondary !important;
+    @include btn-hover($secondary);
+}
+
+@mixin card {
+    border-radius: 12px;
+    box-shadow: 4px 1px 15px rgba(0, 0, 0, .2);
+}
+
+.card-container {
+    padding: 3em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 320px));
+    grid-template-rows: 1fr;
+    justify-content: center;
+    gap: 3rem;
+    margin: 0 auto;
+
+    .topic-card {
+        @include card;
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-content: center;
+
+        .card-header {
+            padding: 0 2rem;
+        }
+
+        .card-footer {
+            margin: 0 auto;
+            padding: .2em .6em;
+            display: flex;
+            gap: .3em;
+        }
+    }
+}

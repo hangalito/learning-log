@@ -43,16 +43,10 @@
     </div>
 </dialog>
 <main>
-    <div class="card-list">
+    <div class="card-container">
+        <!--/*@thymesVar id="topic" type="dev.hangalito.topics.model.Topic"*/-->
         <div class="topic-card" th:each="topic : ${topics}">
-            <h2 th:text="${topic.name}">TOPIC NAME</h2>
-            <div class="option">
-                <a class="btn btn-primary" th:href="@{/topics/{topicName}(topicName=${topic.name})}">Subjects</a>
-                <form class="option" method="post" th:action="@{/topic/delete}">
-                    <input name="id" th:value="${topic.id}" type="hidden">
-                    <input class="btn danger" th:value="Delete" type="submit">
-                </form>
-            </div>
+            <div th:include="~{fragments/cards::topic-card(${topic})}"></div>
         </div>
     </div>
     <a class="fab">Add topic</a>

@@ -6,36 +6,38 @@
     <title th:text="${title}"></title>
     <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
-    <script async th:src="@{/js/script.js}" type="text/javascript"></script>
 </head>
 <body>
 <div th:replace="~{fragments/navbar::header(${username})}"></div>
 <dialog>
-    <div class="modal-header">
-        <p class="modal-title">Add new topic</p>
-    </div>
-    <div class="modal-main">
-        <form method="post" th:action="@{/subject/new}">
+    <div class="modal">
+        <div class="modal-header">
+            <p class="modal-title">Add new subject</p>
+        </div>
+        <div class="modal-content">
+            <form method="post" th:action="@{/subject/new}">
+                <div class="form-input">
+                    <label for="content" class="label">Content</label>
+                    <input id="content" name="content" placeholder="Enter a subject" required type="text">
+                    <small class="error label" id="content-error" style="display: none">Cannot create an empty
+                        subject</small>
+                </div>
 
-            <label for="content">Content</label>
-            <input id="content" name="content" placeholder="Enter a subject" required type="text">
-            <br>
-            <small class="error" style="display: none">Cannot create an empty subject</small>
+                <input name="topic" th:if="${topic}!=null" th:value="${topic.id}" type="hidden">
+                <input name="topicName" th:if="${topic}!=null" th:value="${topic.name}" type="hidden">
 
-            <input name="topic" th:if="${topic}!=null" th:value="${topic.id}" type="hidden">
-            <input name="topicName" th:if="${topic}!=null" th:value="${topic.name}" type="hidden">
-
-            <br>
-            <select name="topic" required th:if="${topic}==null" th:label="Exception">
-                <option value="none">--Select a topic--</option>
-                <option th:each="t : ${topics}" th:text="${t.name}" th:value="${t.id}"></option>
-            </select>
-            <br>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="modal-button" formmethod="dialog" id="modal-button-cancel">Cancel</button>
-        <button class="modal-button" id="modal-button-confirm">Add subject</button>
+                <div class="form-input">
+                    <label class="label" for="topic">Select the topic for this subject</label>
+                    <select name="topic" id="topic" th:if="${topic}==null" required>
+                        <option th:each="t : ${topics}" th:text="${t.name}" th:value="${t.id}"></option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-outline" formmethod="dialog" id="modal-button-cancel">Cancel</button>
+            <button class="btn-form" id="modal-button-confirm">Add subject</button>
+        </div>
     </div>
 </dialog>
 <main>
@@ -46,7 +48,39 @@
             <span th:text="${subject.topic.name}"></span>
         </p>
     </div>
-    <button class="fab">Add subject</button>
+    <a class="fab"></a>
 </main>
+<script>
+    const modal = document.querySelector('dialog');
+    const topic = document.querySelector('select');
+    const confirmButton = document.querySelector('#modal-button-confirm');
+
+    document.querySelector('.fab').addEventListener('click', () => {
+        modal.showModal();
+    });
+
+    document.querySelector('#modal-button-cancel').addEventListener('click', () => {
+        modal.close()
+        document.querySelector('#content-error').style.display = 'none';
+    });
+
+    confirmButton.addEventListener('click', () => {
+        const value = document.querySelector('#content').value.trim();
+        const label = document.querySelector('#content-error');
+        if (value === '') {
+            label.style.display = 'initial';
+            document.querySelector('#content').value = '';
+        } else {
+            label.style.display = 'none';
+            const option = document.querySelector('select');
+            if (option.value === '--Select a topic--') {
+                window.alert('Please select a topic');
+                option.focus();
+            } else {
+                document.querySelector('dialog').querySelector('form').submit();
+            }
+        }
+    });
+</script>
 </body>
 </html>

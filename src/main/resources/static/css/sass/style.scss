@@ -91,7 +91,7 @@ form {
             margin: .1em;
         }
 
-        input[type="text"], input[type="password"] {
+        input[type="text"], input[type="password"], select {
             font-size: $defaultFontSize;
             padding: .2em;
             border-radius: 4px;

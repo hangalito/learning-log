@@ -229,4 +229,11 @@ dialog {
     position: fixed;
     bottom: 0;
     right: 0;
+
+    font-size: $mediumFont;
+    font-weight: 600;
+
+    &::after {
+        content: '+';
+    }
 }

@@ -54,6 +54,7 @@ public class SubjectController {
         Topic         topic    = userService.getTopic(topicName, principal);
         model.addAttribute("subjects", subjects);
         model.addAttribute("topic", topic);
+        model.addAttribute("title", topicName);
         return "subjects";
     }
 

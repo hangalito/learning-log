@@ -243,10 +243,16 @@ dialog::backdrop {
     position: fixed;
     bottom: 0;
     right: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
 }
 
 .fab:hover {
     cursor: pointer;
+}
+
+.fab::after {
+    content: "+";
 }
 
 body {
@@ -329,7 +335,7 @@ form .form-input .label {
     margin: 0.1em;
 }
 
-form .form-input input[type=text], form .form-input input[type=password] {
+form .form-input input[type=text], form .form-input input[type=password], form .form-input select {
     font-size: 1rem;
     padding: 0.2em;
     border-radius: 4px;

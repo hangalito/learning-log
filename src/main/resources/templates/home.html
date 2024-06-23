@@ -21,25 +21,28 @@
 <body>
 <div th:replace="~{fragments/navbar::header (${username})}"></div>
 <dialog>
-    <div class="modal-header">
-        <p class="modal-title">Add new topic</p>
-    </div>
-    <div class="modal-main">
-        <form method="post" th:action="@{/topic/new}" th:object="${newTopic}">
-            <label for="topicName">
-                Topic name
-                <abbr title="Write the title of your new topic. Topics should not be longer than 70 characters.">&#128712;</abbr>
-            </label>
-            <br>
-            <input autocomplete="off" autofocus enterkeyhint="done" id="topicName" inputmode="text" name="topicName"
-                   placeholder="Topic" required th:field="*{name}" type="text">
-            <br>
-            <small class="error" style="display: none">Cannot create an empty topic</small>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="modal-button" formmethod="dialog" id="modal-button-cancel">Cancel</button>
-        <button class="modal-button" id="modal-button-confirm">Add topic</button>
+    <div class="modal">
+        <div class="modal-header">
+            <p class="modal-title">Add new topic</p>
+        </div>
+        <div class="modal-content">
+            <form method="post" th:action="@{/topic/new}" th:object="${newTopic}">
+                <div class="form-input">
+                    <label class="label" for="textInput">
+                        Topic name
+                        <abbr title="Write the title of your new topic. Topics should not be longer than 70 characters.">&#128712;</abbr>
+                    </label>
+                    <input autocomplete="off" autofocus enterkeyhint="done" id="textInput" inputmode="text"
+                           name="topicName"
+                           placeholder="Enter the name of the topic" required th:field="*{name}" type="text">
+                    <small class="error label" style="display: none">Cannot create an empty topic</small>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-error" formmethod="dialog" id="modal-button-cancel">Cancel</button>
+            <button class="btn-secondary" id="modal-button-confirm">OK</button>
+        </div>
     </div>
 </dialog>
 <main>

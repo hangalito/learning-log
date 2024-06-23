@@ -14,11 +14,11 @@ cancelButton.addEventListener('click', () => {
 });
 
 confirmButton.addEventListener('click', () => {
-    const input = document.querySelector('#topicName');
+    const input = modal.querySelector('#textInput');
     const inputValue = input.value.trim();
     if (inputValue === '') {
         error.style.display = 'unset';
-        modal.querySelector('#topicName').focus();
+        modal.querySelector('#textInput').focus();
     } else {
         error.style.display = 'none';
         modal.querySelector('form').submit();

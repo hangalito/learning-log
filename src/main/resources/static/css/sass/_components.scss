@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .navbar {
     display: flex;
     flex-flow: row wrap;
@@ -53,6 +55,45 @@
     }
 }
 
+@mixin card {
+    border-radius: 12px;
+    box-shadow: 4px 1px 15px rgba(0, 0, 0, .2);
+}
+
+@mixin button($background: $buttonColor) {
+    padding: 0 1.2rem;
+    background-color: $background;
+    border-radius: .25rem;
+    display: inline-block;
+    margin: .75em 0;
+    font-family: $defaultFont !important;
+    box-sizing: border-box;
+}
+
+.btn {
+    @include button;
+    border: 0;
+    padding: .2rem 1.2rem;
+    color: white;
+
+    &:hover {
+        background-color: darken($buttonColor, 15);
+    }
+}
+
+.btn-outline {
+    @include button(white);
+    border: 1px solid $buttonColor;
+    color: $primary;
+    padding: .2rem 1.2rem;
+
+    &:hover {
+        background-color: $buttonColor;
+        border: 0;
+        color: white;
+    }
+}
+
 .btn-error {
     @extend .btn;
     color: white !important;
@@ -69,11 +110,6 @@
     @extend .btn;
     background-color: $secondary !important;
     @include btn-hover($secondary);
-}
-
-@mixin card {
-    border-radius: 12px;
-    box-shadow: 4px 1px 15px rgba(0, 0, 0, .2);
 }
 
 .card-container {
@@ -102,5 +138,55 @@
             display: flex;
             gap: .3em;
         }
+    }
+}
+
+
+dialog {
+    border: 1px solid rgba(3, 3, 3, .15);
+    border-radius: 12px;
+    margin: auto;
+
+    .modal {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        padding: .6em 1em;
+
+        form {
+            all: unset;
+        }
+
+        .modal-header {
+            font-size: $subtitle;
+            font-weight: 600;
+        }
+
+        .modal-content {
+            margin: .3em .6em;
+
+            input {
+                line-height: 1.5em;
+            }
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: end;
+            gap: .6em;
+
+            button {
+                animation: none !important;
+                scale: none !important;
+
+                &:hover {
+                    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+                }
+            }
+        }
+    }
+
+    &::backdrop {
+        background-color: rgba(3, 3, 3, .81);
     }
 }

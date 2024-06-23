@@ -1,5 +1,6 @@
 @import "themes";
 @import "typography";
+@import "components";
 
 *,
 *::before,
@@ -27,6 +28,7 @@ body {
     h1, h2, h3 {
         margin-top: 2rem;
         margin-bottom: .75rem;
+        display: inline-block;
     }
 
     p {

@@ -1,0 +1,36 @@
+.navbar {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 8px;
+    align-content: center;
+    align-items: center;
+
+    box-shadow: 0 0 12px rgba(3, 3, 3, .3);
+
+    .navbar-links {
+        flex-direction: column;
+        color: black;
+
+        .title {
+            margin-right: .2em;
+            color: inherit;
+        }
+
+        .subtitle {
+            margin-left: .2em;
+            color: inherit;
+        }
+    }
+
+    .navbar-image-container {
+        width: 50px;
+        margin-left: auto;
+        box-shadow: 0 0 9px rgba(0, 0, 0, .2);
+        border-radius: 100%;
+        padding: 3px;
+
+        .navbar-image {
+            width: 100%;
+        }
+    }
+}

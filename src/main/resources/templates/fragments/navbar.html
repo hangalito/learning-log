@@ -2,16 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <body>
-<header th:fragment="header(username)">
-    <nav>
-        <a class="title" th:href="@{/home}">
-            <abbr th:text="${@applicationName}" th:title="${@applicationName} + ' Home'"></abbr>
-        </a>
-        <a class="nav-item" th:href="@{/subjects}">Subjects</a>
+<header class="navbar" th:fragment="header(username)">
+    <nav class="navbar-links">
+        <a class="title" th:href="@{/home}" th:text="${@applicationName}" th:title="${@applicationName + ' Home'}"></a>
+        <a class="subtitle" th:href="@{/subjects}" title="View all subjects">Subjects</a>
     </nav>
-    <a class="profile" th:href="@{/profile}">
-        <img th:alt="${username}" th:src="@{/img/user.png}">
-        <span th:text="${username}"></span>
+    <a class="navbar-image-container" th:href="@{/profile}">
+        <img class="navbar-image" th:alt="${username}" th:src="@{/img/user.png}" th:title="${username}">
     </a>
 </header>
 </body>

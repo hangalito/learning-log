@@ -1,0 +1,15 @@
+// Default colors
+$primary: #0ea8e6 !default;
+$secondary: #00c487 !default;
+$alert: #d8cc42 !default;
+$error: #f32929 !default;
+
+// Inverse colors
+$primaryInverse: lighten($primary, 30%) !default;
+$secondaryInverse: lighten($secondary, 30%) !default;
+
+// Component colors
+$cardColor: lighten($secondaryInverse, 75%);
+
+$buttonColor: $primary !default;
+$buttonColorHover: lighten($primary, 50%);

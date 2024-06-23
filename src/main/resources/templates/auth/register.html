@@ -4,40 +4,53 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Create account</title>
-    <link media="all" rel="stylesheet" th:href="@{/css/auth.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/secure.png}" type="image/x-icon">
+    <style>
+        .label::after {
+            content: '*';
+            color: red;
+            margin-left: .1em;
+        }
+
+        .tooltip {
+            font-size: .65em;
+        }
+    </style>
 </head>
 <body>
-<div class="form-container">
-    <h1>Register</h1>
+<div class="container">
     <form method="post" th:action="@{/register}" th:object="${user}">
-        <label>
-            First name:
-            <input name="firstname" placeholder="Firstname" required th:field="*{firstName}" type="text">
-            <small class="error" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}">FIRSTNAME
-                ERROR</small>
-        </label>
-        <br>
-        <label>
-            Last name:
-            <input name="lastname" placeholder="Lastname" required th:field="*{lastName}" type="text">
-            <small class="error" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}">LAST NAME</small>
-        </label>
-        <br>
-        <label>
-            Username:
-            <input name="username" placeholder="Username" required th:field="*{username}" type="text">
-            <small class="error" th:errors="*{username}" th:if="${#fields.hasErrors('username')}">USERNAME</small>
-        </label>
-        <br>
-        <label>
-            Password:
-            <input name="password" placeholder="Password" required th:field="*{password}" type="password">
-            <small class="error" th:errors="*{password}" th:if="${#fields.hasErrors('password')}">PASSWORD</small>
-        </label>
-        <br>
-        <input type="submit" value="Create account">
-        <a th:href="@{/login}">Already have an account?</a>
+        <p class="title">Register</p>
+
+        <div class="form-input">
+            <label class="label" for="firstname"> First name</label>
+            <input id="firstname" name="firstname" placeholder="Enter your first name" required th:field="*{firstName}"
+                   type="text">
+            <small class="error label" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}"></small>
+        </div>
+
+        <div class="form-input">
+            <label class="label" for="lastname">Last name</label>
+            <input id="lastname" name="lastname" placeholder="Lastname" required th:field="*{lastName}" type="text">
+            <small class="error label" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></small>
+        </div>
+
+        <div class="form-input">
+            <label class="label" for="username">Username</label>
+            <input id="username" name="username" placeholder="Username" required th:field="*{username}" type="text">
+            <small class="error label" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></small>
+        </div>
+
+        <div class="form-input">
+            <label class="label" for="password">Password</label>
+            <input id="password" name="password" placeholder="Password" required th:field="*{password}" type="password">
+            <small class="error label" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></small></div>
+
+        <p class="tooltip" inert>* Required fields </p>
+
+        <input class="btn column-centered" type="submit" value="Create account">
+        <a class="btn-outline column-centered" th:href="@{/login}">Already have an account?</a>
     </form>
 </div>
 </body>

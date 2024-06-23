@@ -1,0 +1,132 @@
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-size: 1em;
+}
+
+body {
+    font-family: "Roboto", "sans-serif";
+}
+
+body .title {
+    font-size: 1.95rem;
+    font-weight: 800;
+}
+
+body .subtitle {
+    font-size: 2.25rem;
+    font-weight: 600;
+}
+
+body h1, body h2, body h3 {
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+body p {
+    margin-top: 0.5rem;
+    margin-bottom: 1.15rem;
+}
+
+body ul {
+    margin-left: 2em;
+}
+
+body ul li {
+    list-style: none;
+}
+
+.error, .error-label {
+    color: #f32929 !important;
+}
+
+.error-label {
+    background-color: #fbbaba;
+    padding: 0.6em;
+    border-radius: 0.3em;
+    text-align: center;
+}
+
+.btn {
+    padding: 0.1rem 1.5rem;
+    background-color: #0ea8e6;
+    border-radius: 0.25rem;
+    display: inline-block;
+    margin: 0.75em 0;
+    font-family: "Roboto", "sans-serif" !important;
+    box-sizing: border-box;
+    border: 0;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #0a739e;
+}
+
+.btn-outline {
+    padding: 0.1rem 1.5rem;
+    background-color: white;
+    border-radius: 0.25rem;
+    display: inline-block;
+    margin: 0.75em 0;
+    font-family: "Roboto", "sans-serif" !important;
+    box-sizing: border-box;
+    border: 1px solid #0ea8e6;
+    color: #0ea8e6;
+}
+
+.btn-outline:hover {
+    background-color: #0ea8e6;
+    border: 0;
+    color: white;
+}
+
+.column-centered {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+form {
+    width: 36vw;
+    min-width: 300px;
+    max-width: 500px;
+    border: 0;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+    margin: 30px auto 0;
+}
+
+form .form-input {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0.3em 0;
+}
+
+form .form-input .label {
+    font-size: 0.75rem;
+    margin: 0.1em;
+}
+
+form .form-input input[type=text], form .form-input input[type=password] {
+    font-size: 1rem;
+    padding: 0.2em;
+    border-radius: 4px;
+    border: 1px solid #8c8c8c;
+    display: inline-block;
+}
+
+/*# sourceMappingURL=style.css.map */

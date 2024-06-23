@@ -1,0 +1,16 @@
+$defaultFontSize: 1rem;
+$smallFont: $defaultFontSize * .75;
+$mediumFont: $defaultFontSize * 1.3;
+$largeFont: $defaultFontSize * 3;
+$extraLargeFont: $defaultFontSize * 6;
+
+
+$defaultFont: "Roboto", 'sans-serif' !default;
+
+
+$title: $largeFont * .65;
+$subtitle: $largeFont * .75;
+
+
+$letterSpacing: 1.02rem;
+$letterSpacingLink: 1.5rem;

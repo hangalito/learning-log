@@ -19,39 +19,37 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <form method="post" th:action="@{/register}" th:object="${user}">
-        <p class="title">Register</p>
+<form method="post" th:action="@{/register}" th:object="${user}">
+    <p class="title">Register</p>
 
-        <div class="form-input">
-            <label class="label" for="firstname"> First name</label>
-            <input id="firstname" name="firstname" placeholder="Enter your first name" required th:field="*{firstName}"
-                   type="text">
-            <small class="error label" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}"></small>
-        </div>
+    <div class="form-input">
+        <label class="label" for="firstname"> First name</label>
+        <input id="firstname" name="firstname" placeholder="Enter your first name" required th:field="*{firstName}"
+               type="text">
+        <small class="error label" th:errors="*{firstName}" th:if="${#fields.hasErrors('firstName')}"></small>
+    </div>
 
-        <div class="form-input">
-            <label class="label" for="lastname">Last name</label>
-            <input id="lastname" name="lastname" placeholder="Lastname" required th:field="*{lastName}" type="text">
-            <small class="error label" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></small>
-        </div>
+    <div class="form-input">
+        <label class="label" for="lastname">Last name</label>
+        <input id="lastname" name="lastname" placeholder="Lastname" required th:field="*{lastName}" type="text">
+        <small class="error label" th:errors="*{lastName}" th:if="${#fields.hasErrors('lastName')}"></small>
+    </div>
 
-        <div class="form-input">
-            <label class="label" for="username">Username</label>
-            <input id="username" name="username" placeholder="Username" required th:field="*{username}" type="text">
-            <small class="error label" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></small>
-        </div>
+    <div class="form-input">
+        <label class="label" for="username">Username</label>
+        <input id="username" name="username" placeholder="Username" required th:field="*{username}" type="text">
+        <small class="error label" th:errors="*{username}" th:if="${#fields.hasErrors('username')}"></small>
+    </div>
 
-        <div class="form-input">
-            <label class="label" for="password">Password</label>
-            <input id="password" name="password" placeholder="Password" required th:field="*{password}" type="password">
-            <small class="error label" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></small></div>
+    <div class="form-input">
+        <label class="label" for="password">Password</label>
+        <input id="password" name="password" placeholder="Password" required th:field="*{password}" type="password">
+        <small class="error label" th:errors="*{password}" th:if="${#fields.hasErrors('password')}"></small></div>
 
-        <p class="tooltip" inert>* Required fields </p>
+    <p class="tooltip" inert>* Required fields </p>
 
-        <input class="btn column-centered" type="submit" value="Create account">
-        <a class="btn-outline column-centered" th:href="@{/login}">Already have an account?</a>
-    </form>
-</div>
+    <input class="btn column-centered" type="submit" value="Create account">
+    <a class="btn-outline column-centered" th:href="@{/login}">Already have an account?</a>
+</form>
 </body>
 </html>

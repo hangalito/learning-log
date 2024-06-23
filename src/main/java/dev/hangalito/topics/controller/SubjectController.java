@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 @AllArgsConstructor
@@ -80,6 +81,18 @@ public class SubjectController {
         } else {
             return "redirect:/topics/" + topicName;
         }
+    }
+
+    @GetMapping("/subject/delete/{id}/{next}")
+    public String deleteTopic(@PathVariable int id, @PathVariable String next) {
+        userService.deleteSubject(id);
+        String uri;
+        if (Objects.equals(next, "All subjects")) {
+            uri = "redirect:/subjects";
+        } else {
+            uri = "redirect:/topics/" + next;
+        }
+        return uri;
     }
 
 }

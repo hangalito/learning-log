@@ -23,7 +23,7 @@
         <a class="subject-card__anchor" th:text="${subject.topic.name}"
            th:href="@{/topics/{topicName}(topicName=${subject.topic.name})}" title="Go to topic"></a>
         <div class="subject-card__actions">
-            <a class="btn-error">Delete</a>
+            <a class="btn-error" th:href="@{/subject/delete/{id}/{next}(id=${subject.id},next=${title})}">Delete</a>
         </div>
     </div>
 </div>

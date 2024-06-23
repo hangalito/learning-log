@@ -114,4 +114,8 @@ public class UserService implements UserDetailsService {
         subjectService.addSubject(subject);
     }
 
+    public void deleteSubject(int id) {
+        subjectService.deleteById(id);
+    }
+
 }

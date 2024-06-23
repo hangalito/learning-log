@@ -1,6 +1,11 @@
 @use "sass:math";
 
 .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
     display: flex;
     flex-flow: row wrap;
     padding: 8px;
@@ -186,7 +191,6 @@ dialog {
         background-color: rgba(3, 3, 3, .81);
     }
 }
-
 
 .fab {
     @include button;

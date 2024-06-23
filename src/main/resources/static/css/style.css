@@ -76,9 +76,8 @@
   padding: 0.2rem 1.2rem;
 }
 .btn-outline:hover {
-  background-color: #0ea8e6;
-  border: 0;
   color: white;
+  background-color: #0ea8e6;
 }
 
 .btn-error {
@@ -110,10 +109,10 @@
 }
 
 .card-container {
-  padding: 3em;
+  padding: 6em 1em;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 320px));
-  grid-template-rows: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  grid-template-rows: auto;
   justify-content: center;
   gap: 3rem;
   margin: 0 auto;
@@ -126,12 +125,8 @@
   justify-content: center;
   align-content: center;
 }
-.card-container .topic-card .card-header {
-  padding: 0 2rem;
-}
 .card-container .topic-card .card-footer {
   margin: 0 auto;
-  padding: 0.2em 0.6em;
   display: flex;
   gap: 0.3em;
 }

@@ -1,0 +1,84 @@
+$paddingSmall: 4px;
+$paddingMedium: 8px;
+$paddingLarge: 12px;
+$paddingHuge: 16px;
+
+$title: 27px;
+$body: 15px;
+$label: 12px;
+
+dialog {
+    font-family: "Roboto", sans-serif;
+    border-radius: 21px;
+    border: .5px solid rgba(10, 10, 10, .4);
+    padding: 3px 27px 3px 27px;
+
+    label {
+        font-size: $label;
+        display: block;
+    }
+
+    .form-input {
+        padding: $paddingSmall;
+    }
+}
+
+dialog::backdrop {
+    background-color: black;
+    opacity: .45;
+}
+
+.modal-header {
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.modal-main {
+    padding: $paddingLarge;
+
+    .form-input input {
+        margin-top: $paddingSmall;
+        padding: $paddingMedium;
+        font-size: $body;
+
+        border-radius: 8px;
+        border: 1px solid rgba(0, 0, 0, .2);
+    }
+}
+
+.modal-footer {
+    margin: $paddingHuge 0;
+
+    justify-content: end;
+    align-items: end;
+    display: flex;
+    gap: $paddingMedium;
+
+    #modal-button-confirm {
+        background-color: rgba(96, 225, 190, 0.75);
+    }
+
+    #modal-button-confirm:hover {
+        background-color: #4fd6b7;
+    }
+}
+
+.modal-button {
+    padding: .3em .8em;
+    border: 1px solid rgba(0, 0, 0, .1);
+
+    border-radius: $paddingSmall;
+    font-size: $body;
+    line-height: 1.5;
+}
+
+.modal-button:hover {
+    cursor: pointer;
+    box-shadow: 2px 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+

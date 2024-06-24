@@ -58,7 +58,6 @@ public class UserService implements UserDetailsService {
     public void updatePassword(Principal principal, String currentPassword, String newPassword) throws InvalidCredentialException {
         User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
         if (!encoder.matches(currentPassword, user.getPassword())) {
-            log.debug("Incorrect password");
             throw new InvalidCredentialException("Incorrect password");
         }
         user.setPassword(encoder.encode(newPassword));

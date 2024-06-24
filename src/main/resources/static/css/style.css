@@ -58,7 +58,7 @@
     }
 }
 
-.btn, .btn-form, .btn-form-danger, .btn-secondary, .btn-alert, .btn-error {
+.btn, .btn-form, .btn-form-danger, .btn-secondary, .btn-error {
     padding: 0 1.2rem;
     background-color: #0ea8e6;
     border-radius: 0.25rem;
@@ -71,11 +71,11 @@
     color: white;
 }
 
-.btn:hover, .btn-form:hover, .btn-form-danger:hover, .btn-secondary:hover, .btn-alert:hover, .btn-error:hover {
+.btn:hover, .btn-form:hover, .btn-form-danger:hover, .btn-secondary:hover, .btn-error:hover {
     cursor: pointer;
 }
 
-.btn:hover, .btn-form:hover, .btn-form-danger:hover, .btn-secondary:hover, .btn-alert:hover, .btn-error:hover {
+.btn:hover, .btn-form:hover, .btn-form-danger:hover, .btn-secondary:hover, .btn-error:hover {
     background-color: #0a739e;
 }
 
@@ -108,13 +108,6 @@
 
 .btn-error:hover {
     background-color: #c40b0b !important;
-    animation: buttonAnimation 300ms ease-out;
-    scale: 1.2;
-    box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);
-}
-
-.btn-alert:hover {
-    background-color: #0a739e !important;
     animation: buttonAnimation 300ms ease-out;
     scale: 1.2;
     box-shadow: 3px 3px 12px rgba(0, 0, 0, 0.6);

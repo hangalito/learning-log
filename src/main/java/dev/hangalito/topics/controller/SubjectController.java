@@ -5,8 +5,6 @@ import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.service.UserService;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +17,7 @@ import java.util.Objects;
 @AllArgsConstructor
 public class SubjectController {
 
-    private static final Logger      log = LoggerFactory.getLogger(SubjectController.class);
-    private final        UserService userService;
+    private final UserService userService;
 
     @ModelAttribute(name = "username")
     public String username(Principal principal) {

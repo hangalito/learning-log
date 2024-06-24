@@ -108,11 +108,6 @@
     @include btn-hover($error);
 }
 
-.btn-alert {
-    @extend .btn;
-    @include btn-hover($primary);
-}
-
 .btn-secondary {
     @extend .btn;
     background-color: $secondary !important;

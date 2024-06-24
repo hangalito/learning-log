@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Topics</title>
-    <link media="all" rel="stylesheet" th:href="@{/css/header.css}" type="text/css">
-    <link media="all" rel="stylesheet" th:href="@{/css/main.css}" type="text/css">
-    <link media="all" rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+    <title th:text="${@applicationName} + ' | Home'"></title>
+    <link media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css">
     <link rel="shortcut icon" th:href="@{/img/favicon.png}" type="image/x-icon">
     <script async th:src="@{/js/script.js}" type="text/javascript"></script>
-    <script async th:src="@{/js/modals.js}" type="text/javascript"></script>
 
     <style>
         label {
@@ -24,44 +21,38 @@
 <body>
 <div th:replace="~{fragments/navbar::header (${username})}"></div>
 <dialog>
-    <div class="modal-header">
-        <p class="modal-title">Add new topic</p>
-    </div>
-    <div class="modal-main">
-        <form method="post" th:action="@{/topic/new}" th:object="${newTopic}">
-            <div class="form-input">
-                <label for="topicName">
-                    Topic name
-                    <abbr title="Write the title of your new topic. Topics should not be longer than 70 characters.">&#128712;</abbr>
-                </label>
-                <input autocomplete="off" autofocus enterkeyhint="done" id="topicName" inputmode="text" name="topicName"
-                       placeholder="Topic" required th:field="*{name}" type="text">
-                <small class="error" style="display: none">Cannot create an empty topic</small>
-            </div>
-        </form>
-    </div>
-    <div class="modal-footer">
-        <button class="modal-button" formmethod="dialog" id="modal-button-cancel">Cancel</button>
-        <button class="modal-button" id="modal-button-confirm">Add topic</button>
+    <div class="modal">
+        <div class="modal-header">
+            <p class="modal-title">Add new topic</p>
+        </div>
+        <div class="modal-content">
+            <form method="post" th:action="@{/topic/new}" th:object="${newTopic}">
+                <div class="form-input">
+                    <label class="label" for="textInput">
+                        Topic name
+                        <abbr title="Write the title of your new topic. Topics should not be longer than 70 characters.">&#128712;</abbr>
+                    </label>
+                    <input autocomplete="off" autofocus enterkeyhint="done" id="textInput" inputmode="text"
+                           name="topicName"
+                           placeholder="Enter the name of the topic" required th:field="*{name}" type="text">
+                    <small class="error label" style="display: none">Cannot create an empty topic</small>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-error" formmethod="dialog" id="modal-button-cancel">Cancel</button>
+            <button class="btn-secondary" id="modal-button-confirm">OK</button>
+        </div>
     </div>
 </dialog>
 <main>
-    <div class="card-list">
+    <div class="card-container">
+        <!--/*@thymesVar id="topic" type="dev.hangalito.topics.model.Topic"*/-->
         <div class="topic-card" th:each="topic : ${topics}">
-            <h2 th:text="${topic.name}">TOPIC NAME</h2>
-            <div class="option">
-                <form class="option" method="post" th:action="@{/subjects}">
-                    <input name="topic" th:value="${topic.name}" type="hidden">
-                    <input class="btn btn-primary" th:value="Subjects" type="submit">
-                </form>
-                <form class="option" method="post" th:action="@{/topic/delete}">
-                    <input name="id" th:value="${topic.id}" type="hidden">
-                    <input class="btn danger" th:value="Delete" type="submit">
-                </form>
-            </div>
+            <div th:insert="~{fragments/cards::topic-card(${topic})}"></div>
         </div>
     </div>
-    <a class="fab">Add topic</a>
 </main>
+<a class="fab"></a>
 </body>
 </html>

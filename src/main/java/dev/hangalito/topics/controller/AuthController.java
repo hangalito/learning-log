@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Slf4j
 @Controller
@@ -51,7 +49,6 @@ public class AuthController {
         if (errors.hasErrors()) {
             return "auth/register";
         }
-        log.debug("Saving user: {}", user);
         userService.createAccount(user);
         return "redirect:/login";
     }
@@ -65,7 +62,6 @@ public class AuthController {
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
         User user = userService.getUser(principal);
-        Logger.getLogger(AuthController.class.getName()).log(Level.SEVERE, user.toString());
         model.addAttribute("id", user.getId());
         model.addAttribute("username", user.getUsername());
         model.addAttribute("firstName", user.getFirstName());
@@ -105,15 +101,12 @@ public class AuthController {
             String doNotMatch    = (String) session.getAttribute(DO_NOT_MATCH);
 
             if (invalid != null) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, invalid);
                 model.addAttribute("currentPasswordError", invalid);
             }
             if (shortPassword != null) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, shortPassword);
                 model.addAttribute("shortMessage", shortPassword);
             }
             if (doNotMatch != null) {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, doNotMatch);
                 model.addAttribute("error", doNotMatch);
             }
         }

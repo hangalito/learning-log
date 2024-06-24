@@ -49,7 +49,7 @@
     <div class="card-container">
         <!--/*@thymesVar id="topic" type="dev.hangalito.topics.model.Topic"*/-->
         <div class="topic-card" th:each="topic : ${topics}">
-            <div th:include="~{fragments/cards::topic-card(${topic})}"></div>
+            <div th:insert="~{fragments/cards::topic-card(${topic})}"></div>
         </div>
     </div>
 </main>

@@ -118,7 +118,7 @@ public class AuthController {
             }
         }
 
-        return "auth/credentials";
+        return "auth/profile";
     }
 
     @PostMapping("/profile/credentials")

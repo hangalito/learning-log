@@ -8,10 +8,10 @@ spring:
         include: dev,test,prod
     active: dev
   datasource:
-    url: jdbc:mariadb://localhost:3306/mynotes
+    url: jdbc:mysql://localhost:3306/mynotes
     username: root
     password: root
-    driver-class-name: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     database: mysql
     show-sql: true

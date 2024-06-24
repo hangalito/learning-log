@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS `user`
 (
-    `id`       INT AUTO_INCREMENT,
-    `name`     VARCHAR(45) NOT NULL,
-    `surname`  VARCHAR(45) NOT NULL,
-    `username` VARCHAR(15) NOT NULL UNIQUE,
-    `password` TEXT        NOT NULL CHECK (LENGTH(`password`) > 8),
+    `id`         INT AUTO_INCREMENT,
+    `first_name` VARCHAR(45) NOT NULL,
+    `last_name`  VARCHAR(45) NOT NULL,
+    `username`   VARCHAR(15) NOT NULL UNIQUE,
+    `password`   TEXT        NOT NULL CHECK (LENGTH(`password`) > 8),
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDb
   DEFAULT CHARSET = utf8mb4

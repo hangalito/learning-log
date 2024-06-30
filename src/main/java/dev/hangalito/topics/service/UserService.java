@@ -7,37 +7,23 @@ import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Principal;
 import java.util.List;
 
 @Slf4j
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final UserRepository userRepository;
     private final TopicService   topicService;
     private final SubjectService subjectService;
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("User " + username + " not found"));
-        return org.springframework.security.core.userdetails.User.builder().username(user.getUsername()).password(
-                user.getPassword()).build();
-    }
 
     public User getUser(Principal principal) {
         return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
@@ -69,18 +55,6 @@ public class UserService implements UserDetailsService {
         return topicService.getTopics(user);
     }
 
-    public Topic getTopic(String name, Principal principal) {
-        return topicService.getTopic(getUser(principal), name)
-                           .orElseThrow(() -> HttpClientErrorException.NotFound
-                                   .create("Could not find the specified topic",
-                                           HttpStatusCode.valueOf(404),
-                                           "Not Found",
-                                           null, null,
-                                           StandardCharsets.UTF_8
-                                   )
-                           );
-    }
-
     public void addTopic(Topic topic, Principal principal) {
         User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
         topic.setAuthor(user);
@@ -95,12 +69,6 @@ public class UserService implements UserDetailsService {
     public List<Subject> getSubjects(Principal principal) {
         User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
         return subjectService.getSubjects(user);
-    }
-
-    public List<Subject> getSubjects(Principal principal, String topicName) {
-        User  user  = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-        Topic topic = topicService.getTopic(user, topicName).orElseThrow(IllegalStateException::new);
-        return subjectService.getSubjectByTopic(topic, user);
     }
 
     public void createSubject(String content, int topicId, Principal principal) {

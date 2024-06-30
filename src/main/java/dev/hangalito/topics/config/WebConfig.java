@@ -8,6 +8,9 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+
 @EnableWebMvc
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -18,6 +21,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public String applicationName() {
         return applicationName;
+    }
+
+    @Bean
+    public Charset charset() {
+        return StandardCharsets.US_ASCII;
     }
 
     @Override

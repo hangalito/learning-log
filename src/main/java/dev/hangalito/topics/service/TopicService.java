@@ -15,9 +15,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-class TopicService {
+public class TopicService {
 
     private final TopicRepository topicRepository;
+    private final SlugService     slugService;
 
     @SneakyThrows
     public Topic getById(int id) {
@@ -36,6 +37,18 @@ class TopicService {
         return (List<Topic>) topicRepository.findByAuthorOrderByName(author);
     }
 
+    public Topic getBySlug(String slug) {
+        return topicRepository.findBySlug(slug)
+                              .orElseThrow(() -> HttpClientErrorException.NotFound
+                                      .create("Could not find the specified topic",
+                                              HttpStatusCode.valueOf(404),
+                                              "Not Found",
+                                              null, null,
+                                              StandardCharsets.UTF_8
+                                      )
+                              );
+    }
+
     public Optional<Topic> getTopic(User author, String name) {
         return topicRepository.findByAuthorAndNameOrderByName(author, name);
     }
@@ -44,6 +57,7 @@ class TopicService {
         if (topic.getAuthor() == null) {
             throw new IllegalStateException();
         }
+        topic.setSlug(slugService.slug(topic.getName()));
         topicRepository.save(topic);
     }
 

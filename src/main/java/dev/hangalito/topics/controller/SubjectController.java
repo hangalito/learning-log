@@ -3,6 +3,8 @@ package dev.hangalito.topics.controller;
 import dev.hangalito.topics.model.Subject;
 import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
+import dev.hangalito.topics.service.SubjectService;
+import dev.hangalito.topics.service.TopicService;
 import dev.hangalito.topics.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,9 @@ import java.util.Objects;
 @AllArgsConstructor
 public class SubjectController {
 
-    private final UserService userService;
+    private final UserService    userService;
+    private final SubjectService subjectService;
+    private final TopicService   topicService;
 
     @ModelAttribute(name = "username")
     public String username(Principal principal) {
@@ -52,17 +56,15 @@ public class SubjectController {
         return "subjects";
     }
 
-    @GetMapping("/topics/{topicName}")
-    public String subjects(@PathVariable String topicName, Principal principal, Model model) {
-        List<Subject> subjects = userService.getSubjects(principal, topicName);
-        Topic         topic    = userService.getTopic(topicName, principal);
+    @GetMapping("/topics/{topic}")
+    public String subjects(@PathVariable String topic, Model model) {
+        List<Subject> subjects = subjectService.getAllByTopic(topic);
+        model.addAttribute("topic", topicService.getBySlug(topic));
         model.addAttribute("subjects", subjects);
-        model.addAttribute("topic", topic);
-        model.addAttribute("title", topicName);
         if (subjects.isEmpty()) {
             model.addAttribute("msg", "There's nothing to see here");
         } else {
-            model.addAttribute("msg", topic.getName() + "'s subjects");
+            model.addAttribute("msg", "Subjects on " + subjects.getFirst().getTopic().getName());
         }
         return "subjects";
     }

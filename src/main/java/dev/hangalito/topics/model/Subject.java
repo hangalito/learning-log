@@ -16,7 +16,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "subject")
+@Table(name = "subjects")
 public class Subject {
 
     @Id

@@ -8,7 +8,7 @@
     </div>
     <div class="card-footer">
         <a class="btn-error" th:href="@{/topic/delete/{id}(id=${topic.id})}">Delete</a>
-        <a class="btn-secondary" th:href="@{/topics/{topicName}(topicName=${topic.name})}">Subjects</a>
+        <a class="btn-secondary" th:href="@{/topics/{topic}(topic=${topic.slug})}">Subjects</a>
     </div>
 </div>
 <!--endregion-->
@@ -20,9 +20,11 @@
     </div>
     <div class="subject-card_bottom">
         <a class="subject-card__anchor" th:text="${subject.topic.name}"
-           th:href="@{/topics/{topicName}(topicName=${subject.topic.name})}" title="Go to topic"></a>
+           th:href="@{/topics/{topic}(topic=${subject.topic.slug})}" title="Go to topic"></a>
         <div class="subject-card__actions">
-            <a class="btn-error" th:href="@{/subject/delete/{id}/{next}(id=${subject.id},next=${title})}">Delete</a>
+            <a class="btn-error" th:href="@{/subject/delete/{id}/{next}(id=${subject.id},next=${subject.topic.slug})}">
+                Delete
+            </a>
         </div>
     </div>
 </div>

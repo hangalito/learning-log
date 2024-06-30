@@ -10,6 +10,8 @@ public interface TopicRepository extends CrudRepository<Topic, Integer> {
 
     Iterable<Topic> findByAuthorOrderByName(User author);
 
+    Optional<Topic> findBySlug(String slug);
+
     Optional<Topic> findByAuthorAndNameOrderByName(User author, String name);
 
 }

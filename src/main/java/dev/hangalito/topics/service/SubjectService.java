@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-class SubjectService {
+public class SubjectService {
 
     private final SubjectRepository subjectRepository;
 
@@ -21,6 +21,10 @@ class SubjectService {
 
     public List<Subject> getSubjectByTopic(Topic topic, User user) {
         return (List<Subject>) subjectRepository.findByTopicAndAuthorOrderByContent(topic, user);
+    }
+
+    public List<Subject> getAllByTopic(String topic) {
+        return subjectRepository.findAllByTopicSlugOrderByContent(topic);
     }
 
     public void addSubject(Subject subject) {

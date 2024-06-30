@@ -17,7 +17,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString
 @NoArgsConstructor
 @Entity
-@Table(name = "topic")
+@Table(name = "topics")
 public class Topic {
 
     @Id
@@ -28,6 +28,9 @@ public class Topic {
     @NotBlank(message = "This field is required")
     @Size(max = 70, message = "Topics should not be longer than 70 characters")
     private String name;
+
+    @Column(name = "slug")
+    private String slug;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "author")

@@ -1,16 +1,14 @@
-CREATE TABLE IF NOT EXISTS `subjects`
+CREATE TABLE IF NOT EXISTS `users`
 (
-    `id`       int(11) NOT NULL AUTO_INCREMENT,
-    `content`  text    NOT NULL,
-    `topic_id` int(11) NOT NULL,
-    `author`   int(11) NOT NULL,
+    `id`         int(11)     NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(45) NOT NULL,
+    `last_name`  varchar(45) NOT NULL,
+    `username`   varchar(15) NOT NULL,
+    `password`   text        NOT NULL CHECK (octet_length(`password`) >= 8),
     PRIMARY KEY (`id`),
-    KEY `fk_subject_topic` (`topic_id`),
-    KEY `fk_subject_author` (`author`),
-    CONSTRAINT `fk_subject_author` FOREIGN KEY (`author`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
-    CONSTRAINT `fk_subject_topic` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+    UNIQUE KEY `username` (`username`)
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
+  AUTO_INCREMENT = 3
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;
 
@@ -29,16 +27,19 @@ CREATE TABLE IF NOT EXISTS `topics`
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `users`
+
+CREATE TABLE IF NOT EXISTS `subjects`
 (
-    `id`         int(11)     NOT NULL AUTO_INCREMENT,
-    `first_name` varchar(45) NOT NULL,
-    `last_name`  varchar(45) NOT NULL,
-    `username`   varchar(15) NOT NULL,
-    `password`   text        NOT NULL CHECK (octet_length(`password`) >= 8),
+    `id`       int(11) NOT NULL AUTO_INCREMENT,
+    `content`  text    NOT NULL,
+    `topic_id` int(11) NOT NULL,
+    `author`   int(11) NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `username` (`username`)
+    KEY `fk_subject_topic` (`topic_id`),
+    KEY `fk_subject_author` (`author`),
+    CONSTRAINT `fk_subject_author` FOREIGN KEY (`author`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
+    CONSTRAINT `fk_subject_topic` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 3
+  AUTO_INCREMENT = 2
   DEFAULT CHARSET = utf8mb4
   COLLATE = utf8mb4_general_ci;

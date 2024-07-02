@@ -6,7 +6,9 @@ import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.service.SubjectService;
 import dev.hangalito.topics.service.TopicService;
 import dev.hangalito.topics.service.UserService;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 @Controller
 @AllArgsConstructor
 public class SubjectController {
@@ -40,12 +43,12 @@ public class SubjectController {
 
     @ModelAttribute(name = "topics")
     public List<Topic> topics(Principal principal) {
-        return userService.getTopics(principal);
+        return topicService.getTopics(principal.getName());
     }
 
     @GetMapping("/subjects")
     public String subjects(Model model, Principal principal) {
-        List<Subject> subjects = userService.getSubjects(principal);
+        List<Subject> subjects = subjectService.getSubjects(principal.getName());
         model.addAttribute("subjects", subjects);
         model.addAttribute("title", "All subjects");
         if (subjects.isEmpty()) {
@@ -71,10 +74,10 @@ public class SubjectController {
 
     @PostMapping("/subject/new")
     public String addSubject(
-            @RequestParam String content, @RequestParam(name = "topic") int topicId,
+            @Valid Subject subject,
             @RequestParam(required = false) String topicName, Principal principal
     ) {
-        userService.createSubject(content, topicId, principal);
+        subjectService.addSubject(subject, principal.getName());
         if (topicName == null) {
             return "redirect:/subjects";
         } else {
@@ -83,8 +86,8 @@ public class SubjectController {
     }
 
     @GetMapping("/subject/delete/{id}/{next}")
-    public String deleteTopic(@PathVariable int id, @PathVariable String next) {
-        userService.deleteSubject(id);
+    public String deleteTopic(@PathVariable int id, @PathVariable String next, Principal principal) {
+        subjectService.deleteById(id, principal.getName());
         String uri;
         if (Objects.equals(next, "All subjects")) {
             uri = "redirect:/subjects";

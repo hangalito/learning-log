@@ -14,9 +14,10 @@ import java.util.List;
 public class SubjectService {
 
     private final SubjectRepository subjectRepository;
+    private final UserService       userService;
 
-    public List<Subject> getSubjects(User user) {
-        return (List<Subject>) subjectRepository.findByAuthorOrderByContent(user);
+    public List<Subject> getSubjects(String username) {
+        return (List<Subject>) subjectRepository.findByAuthorUsernameOrderByContent(username);
     }
 
     public List<Subject> getSubjectByTopic(Topic topic, User user) {
@@ -27,14 +28,22 @@ public class SubjectService {
         return subjectRepository.findAllByTopicSlugOrderByContent(topic);
     }
 
-    public void addSubject(Subject subject) {
-        if (subject.getAuthor() == null) throw new IllegalStateException("Cannot add a Subject with a null author");
+    public void addSubject(Subject subject, String username) {
+        User user = userService.findByUsername(username);
+        subject.setAuthor(user);
         if (subject.getTopic() == null) throw new IllegalStateException("Cannot add a Subject with a null topic");
         subjectRepository.save(subject);
     }
 
-    public void deleteById(int id) {
-        subjectRepository.deleteById(id);
+    public void deleteById(int id, String username) {
+        subjectRepository
+                .findById(id)
+                .ifPresent(subject -> {
+                    if (subject.getAuthor().getUsername().equals(username)) {
+                        subjectRepository.delete(subject);
+                    }
+                });
+
     }
 
 }

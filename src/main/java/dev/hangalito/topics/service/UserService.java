@@ -1,8 +1,6 @@
 package dev.hangalito.topics.service;
 
 import dev.hangalito.topics.exceptions.InvalidCredentialException;
-import dev.hangalito.topics.model.Subject;
-import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpServerErrorException;
 
 import java.security.Principal;
-import java.util.List;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.http.HttpStatusCode.valueOf;
@@ -24,8 +21,6 @@ import static org.springframework.http.HttpStatusCode.valueOf;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final TopicService   topicService;
-    private final SubjectService subjectService;
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -33,7 +28,7 @@ public class UserService {
         return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
     }
 
-    public User getUserByUsername(String username) {
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> HttpServerErrorException
                 .InternalServerError
                 .create(valueOf(404), "Could not determine the user details", null, null, UTF_8)
@@ -59,30 +54,6 @@ public class UserService {
         }
         user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
-    }
-
-    public List<Topic> getTopics(Principal principal) {
-        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-        return topicService.getTopics(user);
-    }
-
-    public List<Subject> getSubjects(Principal principal) {
-        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-        return subjectService.getSubjects(user);
-    }
-
-    public void createSubject(String content, int topicId, Principal principal) {
-        var user    = getUser(principal);
-        var subject = new Subject();
-        var topic   = topicService.getById(topicId);
-        subject.setAuthor(user);
-        subject.setContent(content);
-        subject.setTopic(topic);
-        subjectService.addSubject(subject);
-    }
-
-    public void deleteSubject(int id) {
-        subjectService.deleteById(id);
     }
 
 }

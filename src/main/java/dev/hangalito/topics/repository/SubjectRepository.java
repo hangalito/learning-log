@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SubjectRepository extends CrudRepository<Subject, Integer> {
 
-    Iterable<Subject> findByAuthorOrderByContent(User author);
+    Iterable<Subject> findByAuthorUsernameOrderByContent(String username);
 
     List<Subject> findAllByTopicSlugOrderByContent(String topicSlug);
 

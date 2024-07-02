@@ -1,6 +1,7 @@
 package dev.hangalito.topics.controller;
 
 import dev.hangalito.topics.model.Topic;
+import dev.hangalito.topics.service.TopicService;
 import dev.hangalito.topics.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,11 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeController {
 
-    private final UserService userService;
+    private final UserService  userService;
+    private final TopicService topicService;
 
     @ModelAttribute(name = "topics")
     public List<Topic> topics(Principal principal) {
-        return userService.getTopics(principal);
+        return topicService.getTopics(principal.getName());
     }
 
     @ModelAttribute(name = "username")

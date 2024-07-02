@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface TopicRepository extends CrudRepository<Topic, Integer> {
 
-    Iterable<Topic> findByAuthorOrderByName(User author);
+    Iterable<Topic> findByAuthorUsernameOrderByName(String username);
 
     Optional<Topic> findBySlug(String slug);
 

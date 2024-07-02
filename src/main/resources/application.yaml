@@ -17,3 +17,6 @@ spring:
       mode: always
   thymeleaf:
     cache: off
+logging:
+  level:
+    dev.hangalito.topics: debug

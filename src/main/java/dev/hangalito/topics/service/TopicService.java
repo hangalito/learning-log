@@ -3,20 +3,15 @@ package dev.hangalito.topics.service;
 import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.TopicRepository;
-import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.springframework.http.HttpStatusCode.valueOf;
 
 @Service
 @AllArgsConstructor
@@ -24,7 +19,7 @@ public class TopicService {
 
     private final TopicRepository topicRepository;
     private final SlugService     slugService;
-    private final UserRepository  userRepository;
+    private final UserService     userService;
 
     @SneakyThrows
     public Topic getById(int id) {
@@ -39,8 +34,8 @@ public class TopicService {
                               );
     }
 
-    public List<Topic> getTopics(User author) {
-        return (List<Topic>) topicRepository.findByAuthorOrderByName(author);
+    public List<Topic> getTopics(String username) {
+        return (List<Topic>) topicRepository.findByAuthorUsernameOrderByName(username);
     }
 
     public Topic getBySlug(String slug) {
@@ -60,11 +55,7 @@ public class TopicService {
     }
 
     public void addTopic(Topic topic, String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> HttpServerErrorException
-                .InternalServerError
-                .create(valueOf(404), "Could not determine the user details", null, null, UTF_8)
-        );
-        topic.setAuthor(user);
+        topic.setAuthor(userService.findByUsername(username));
         topic.setSlug(slugService.slug(topic.getName()));
         topicRepository.save(topic);
     }

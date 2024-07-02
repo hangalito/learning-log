@@ -1,6 +1,7 @@
 package dev.hangalito.topics.controller;
 
 import dev.hangalito.topics.model.Topic;
+import dev.hangalito.topics.service.TopicService;
 import dev.hangalito.topics.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,8 @@ import java.security.Principal;
 @AllArgsConstructor
 public class TopicController {
 
-    private final UserService userService;
+    private final UserService  userService;
+    private final TopicService topicService;
 
     @ModelAttribute(name = "username")
     public String username(Principal principal) {
@@ -25,14 +27,14 @@ public class TopicController {
 
     @PostMapping("/topic/new")
     public String newTopic(@Valid Topic topic, Principal principal) {
-        userService.addTopic(topic, principal);
+        topicService.addTopic(topic, principal.getName());
         return "redirect:/home";
     }
 
 
     @GetMapping("/topic/delete/{id}")
     public String deleteTopic(@PathVariable int id, Principal principal) {
-        userService.deleteTopic(id, principal);
+        topicService.deleteById(id, principal.getName());
         return "redirect:/home";
     }
 

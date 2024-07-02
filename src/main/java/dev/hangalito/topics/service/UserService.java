@@ -10,9 +10,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 
 import java.security.Principal;
 import java.util.List;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.springframework.http.HttpStatusCode.valueOf;
 
 @Slf4j
 @Service
@@ -27,6 +31,13 @@ public class UserService {
 
     public User getUser(Principal principal) {
         return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> HttpServerErrorException
+                .InternalServerError
+                .create(valueOf(404), "Could not determine the user details", null, null, UTF_8)
+        );
     }
 
     public void createAccount(User user) {
@@ -53,17 +64,6 @@ public class UserService {
     public List<Topic> getTopics(Principal principal) {
         User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
         return topicService.getTopics(user);
-    }
-
-    public void addTopic(Topic topic, Principal principal) {
-        User user = userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-        topic.setAuthor(user);
-        topicService.addTopic(topic);
-    }
-
-    public void deleteTopic(int id, Principal principal) {
-        userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-        topicService.deleteById(id);
     }
 
     public List<Subject> getSubjects(Principal principal) {

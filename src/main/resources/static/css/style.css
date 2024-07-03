@@ -59,7 +59,6 @@
 }
 
 .btn, .btn-form, .btn-form-danger, .btn-secondary, .btn-error {
-    padding: 0 1.2rem;
     background-color: #0ea8e6;
     border-radius: 0.25rem;
     display: inline-block;
@@ -80,7 +79,6 @@
 }
 
 .btn-outline {
-    padding: 0 1.2rem;
     background-color: white;
     border-radius: 0.25rem;
     display: inline-block;
@@ -219,9 +217,7 @@ dialog::backdrop {
 .fab {
     padding: 0 1.2rem;
     background-color: #0ea8e6;
-    border-radius: 0.25rem;
     display: inline-block;
-    margin: 0.75em 0;
     font-family: "Roboto", "sans-serif" !important;
     box-sizing: border-box;
     color: white;

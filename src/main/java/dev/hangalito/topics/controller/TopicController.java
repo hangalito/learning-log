@@ -2,7 +2,6 @@ package dev.hangalito.topics.controller;
 
 import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.service.TopicService;
-import dev.hangalito.topics.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import java.security.Principal;
 @AllArgsConstructor
 public class TopicController {
 
-    private final UserService  userService;
     private final TopicService topicService;
 
     @ModelAttribute(name = "username")

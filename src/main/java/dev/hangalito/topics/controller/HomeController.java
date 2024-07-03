@@ -2,7 +2,6 @@ package dev.hangalito.topics.controller;
 
 import dev.hangalito.topics.model.Topic;
 import dev.hangalito.topics.service.TopicService;
-import dev.hangalito.topics.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +14,6 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeController {
 
-    private final UserService  userService;
     private final TopicService topicService;
 
     @ModelAttribute(name = "topics")

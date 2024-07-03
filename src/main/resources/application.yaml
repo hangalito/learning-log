@@ -19,4 +19,4 @@ spring:
     cache: off
 logging:
   level:
-    dev.hangalito.topics: debug
+    root: info

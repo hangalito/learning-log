@@ -61,7 +61,7 @@ public class AuthController {
 
     @GetMapping("/profile")
     public String profile(Principal principal, Model model) {
-        User user = userService.getUser(principal);
+        User user = userService.findByUsername(principal.getName());
         model.addAttribute("id", user.getId());
         model.addAttribute("username", user.getUsername());
         model.addAttribute("firstName", user.getFirstName());
@@ -93,7 +93,7 @@ public class AuthController {
             Model model,
             HttpSession session
     ) {
-        model.addAttribute("user", userService.getUser(principal));
+        model.addAttribute("user", userService.findByUsername(principal.getName()));
 
         if (error != null) {
             String invalid       = (String) session.getAttribute(INCORRECT_PASSWORD);

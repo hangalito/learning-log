@@ -28,11 +28,11 @@ public class SubjectService {
         return subjectRepository.findAllByTopicSlugOrderByContent(topic);
     }
 
-    public void addSubject(Subject subject, String username) {
+    public Subject addSubject(Subject subject, String username) {
         User user = userService.findByUsername(username);
         subject.setAuthor(user);
         if (subject.getTopic() == null) throw new IllegalStateException("Cannot add a Subject with a null topic");
-        subjectRepository.save(subject);
+        return subjectRepository.save(subject);
     }
 
     public void deleteById(int id, String username) {

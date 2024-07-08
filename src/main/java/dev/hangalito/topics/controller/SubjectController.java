@@ -38,7 +38,7 @@ public class SubjectController {
 
     @ModelAttribute(name = "user")
     public User user(Principal principal) {
-        return userService.getUser(principal);
+        return userService.findByUsername(principal.getName());
     }
 
     @ModelAttribute(name = "topics")
@@ -48,6 +48,7 @@ public class SubjectController {
 
     @GetMapping("/subjects")
     public String subjects(Model model, Principal principal) {
+        if (principal == null) return "redirect:/login";
         List<Subject> subjects = subjectService.getSubjects(principal.getName());
         model.addAttribute("subjects", subjects);
         model.addAttribute("title", "All subjects");
@@ -77,11 +78,11 @@ public class SubjectController {
             @Valid Subject subject,
             @RequestParam(required = false) String topicName, Principal principal
     ) {
-        subjectService.addSubject(subject, principal.getName());
+        var s = subjectService.addSubject(subject, principal.getName());
         if (topicName == null) {
             return "redirect:/subjects";
         } else {
-            return "redirect:/topics/" + topicName;
+            return "redirect:/topics/" + s.getTopic().getSlug();
         }
     }
 

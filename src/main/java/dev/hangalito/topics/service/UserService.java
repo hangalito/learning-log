@@ -5,15 +5,12 @@ import dev.hangalito.topics.model.User;
 import dev.hangalito.topics.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.security.Principal;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.springframework.http.HttpStatusCode.valueOf;
 
 @Slf4j
 @Service
@@ -24,15 +21,10 @@ public class UserService {
 
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public User getUser(Principal principal) {
-        return userRepository.findByUsername(principal.getName()).orElseThrow(IllegalStateException::new);
-    }
-
-    public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> HttpServerErrorException
-                .InternalServerError
-                .create(valueOf(404), "Could not determine the user details", null, null, UTF_8)
-        );
+    public User findByUsername(String username) throws UsernameNotFoundException {
+        return userRepository
+                .findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("Username not found."));
     }
 
     public void createAccount(User user) {

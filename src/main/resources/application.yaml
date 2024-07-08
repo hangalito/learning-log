@@ -11,7 +11,7 @@ spring:
     name: learning_log
     url: jdbc:postgresql://localhost:5432/learning_log
     username: hangalito
-    password: jds.reina
+    password: jds
     driver-class-name: org.postgresql.Driver
   sql:
     init:

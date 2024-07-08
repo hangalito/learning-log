@@ -1,45 +1,32 @@
 CREATE TABLE IF NOT EXISTS `users`
 (
-    `id`         int(11)     NOT NULL AUTO_INCREMENT,
-    `first_name` varchar(45) NOT NULL,
-    `last_name`  varchar(45) NOT NULL,
-    `username`   varchar(15) NOT NULL,
-    `password`   text        NOT NULL CHECK (octet_length(`password`) >= 8),
-    PRIMARY KEY (`id`),
-    UNIQUE KEY `username` (`username`)
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 3
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci;
+    `id`         INT         NOT NULL AUTO_INCREMENT,
+    `first_name` VARCHAR(45) NOT NULL,
+    `last_name`  VARCHAR(45) NOT NULL,
+    `username`   VARCHAR(15) NOT NULL UNIQUE,
+    `password`   TEXT        NOT NULL CHECK (octet_length(`password`) >= 8),
+    PRIMARY KEY (`id`)
+);
 
 CREATE TABLE IF NOT EXISTS `topics`
 (
-    `id`     int(11)     NOT NULL AUTO_INCREMENT,
-    `name`   varchar(70) NOT NULL,
-    `author` int(11)     NOT NULL,
-    `slug`   varchar(70) NOT NULL,
+    `id`     INT         NOT NULL AUTO_INCREMENT,
+    `name`   VARCHAR(70) NOT NULL,
+    `author` INT         NOT NULL,
+    `slug`   VARCHAR(70) NOT NULL,
     PRIMARY KEY (`id`),
-    UNIQUE KEY `unique_identifier` (`name`, `slug`),
-    KEY `fk_topic_author` (`author`),
+    CONSTRAINT `unique_identifier` UNIQUE (`name`, `slug`),
     CONSTRAINT `fk_topic_author` FOREIGN KEY (`author`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci;
+);
 
 
 CREATE TABLE IF NOT EXISTS `subjects`
 (
-    `id`       int(11) NOT NULL AUTO_INCREMENT,
-    `content`  text    NOT NULL,
-    `topic_id` int(11) NOT NULL,
-    `author`   int(11) NOT NULL,
+    `id`       INT  NOT NULL AUTO_INCREMENT,
+    `content`  TEXT NOT NULL,
+    `topic_id` INT  NOT NULL,
+    `author`   INT  NOT NULL,
     PRIMARY KEY (`id`),
-    KEY `fk_subject_topic` (`topic_id`),
-    KEY `fk_subject_author` (`author`),
     CONSTRAINT `fk_subject_author` FOREIGN KEY (`author`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
     CONSTRAINT `fk_subject_topic` FOREIGN KEY (`topic_id`) REFERENCES `topics` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE = InnoDB
-  AUTO_INCREMENT = 2
-  DEFAULT CHARSET = utf8mb4
-  COLLATE = utf8mb4_general_ci;
+);

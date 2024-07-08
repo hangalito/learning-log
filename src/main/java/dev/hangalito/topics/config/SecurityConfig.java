@@ -45,6 +45,7 @@ public class SecurityConfig {
                         .requestMatchers("/css/**").permitAll()
                         .requestMatchers("/img/**").permitAll()
                         .requestMatchers("/js/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
                     ;
                     auth.anyRequest().authenticated();
                 })
